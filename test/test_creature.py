@@ -6,4 +6,4 @@ def test_imports():
 
 
 def test_class_existence():
-    assert callable(creature.creature)
+    assert callable(creature.Creature)
