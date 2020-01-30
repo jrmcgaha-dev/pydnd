@@ -9,7 +9,7 @@ def test_class_existence():
     assert callable(creature.Creature)
 
 
-def test_class_attribute_existence():
+def test_class_instance_attribute_existence():
     empty_creature = creature.Creature()
     assert hasattr(empty_creature, 'name')
     assert hasattr(empty_creature, 'size')
