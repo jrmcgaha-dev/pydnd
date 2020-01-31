@@ -37,3 +37,7 @@ class Creature:
         self.damage_immunities: typing.List[str] = list()
         self.senses: typing.List[str] = list()
         self.languages: typing.List[str] = list()
+
+    @property
+    def _alignment_coord(self):
+        return None
