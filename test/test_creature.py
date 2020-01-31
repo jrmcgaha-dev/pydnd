@@ -34,6 +34,13 @@ def test_class_instance_attribute_existence():
     assert hasattr(empty_creature, 'languages')
 
 
+def test_alignment_set_get():
+    empty_creature = creature.Creature()
+    empty_creature.alignment = 'lg'
+    assert empty_creature._alignment == 'l', 'g'
+    assert empty_creature.alignment == 'Lawful Good'
+
+
 def test_class_instance_property_alignment_coord():
     empty_creature = creature.Creature()
     assert hasattr(empty_creature, '_alignment_coord')
