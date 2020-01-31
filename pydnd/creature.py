@@ -76,7 +76,8 @@ class Creature:
             _order_check = par[0] not in ('l', 'n', 'c')
             _morality_check = par[1] not in ('g', 'n', 'e')
             if _order_check or _morality_check:
-                _log.warning('Invalid alignment. Ignoring assignment.')
+                _log.warning('Invalid alignment. Ignoring %s%s',
+                             *par)
             else:
                 self._alignment = par
 
