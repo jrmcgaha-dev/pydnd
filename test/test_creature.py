@@ -46,6 +46,10 @@ def test_alignment_set_get():
     assert empty_creature.alignment == 'Chaotic Evil'
     empty_creature.alignment = 'invalid'
     assert empty_creature.alignment == 'Chaotic Evil'
+    empty_creature.alignment = 'Good'
+    assert empty_creature.alignment == 'Neutral Good'
+    empty_creature.alignment = ''
+    assert empty_creature.alignment == 'Unaligned'
 
 
 def test_class_instance_property_alignment_coord():
