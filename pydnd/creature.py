@@ -82,4 +82,6 @@ class Creature:
 
     @property
     def _alignment_coord(self):
-        return None
+        _order_coord = self._alignment_hash.get(self._alignment[0], 255)
+        _morality_coord = self._alignment_hash.get(self._alignment[1], 255)
+        return _order_coord, _morality_coord
