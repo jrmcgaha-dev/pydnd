@@ -60,6 +60,7 @@ class Creature:
             Formatted string representing alignment
 
         """
+        _log.debug('_alignment = %s', self._alignment)
         if self._alignment == ('', ''):
             return 'Unaligned'
         if self._alignment[0] == 'u':
