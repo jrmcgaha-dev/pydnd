@@ -2,6 +2,9 @@ import typing
 
 
 class Creature:
+
+    _default_ac = 10
+
     def __init__(self):
         self.name: str = ''
         self.size: str = ''
