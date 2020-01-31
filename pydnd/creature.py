@@ -59,18 +59,20 @@ class Creature:
     @alignment.setter
     def alignment(self, value: str):
         par = value.lower().strip(' ')
-        if par == 'u' or par == 'unaligned':
+        if par == 'u' or par == 'unaligned' or not par:
             self._alignment = ('u', '')
         else:
             _re_pattern = (
-                "(lawful|neutral|chaotic|true|[clnt]){1}"
+                "(lawful|neutral|chaotic|true|[clnt])?"
                 "\\s?"
-                "(good|neutral|evil|[gne]){1}"
+                "(good|neutral|evil|[gne])?"
             )
             par = re.match(_re_pattern, par)
-            if par is not None:
-                _order = par.group(1)[0].replace('t', 'n')
-                _morality = par.group(2)[0]
+            if par.group(0):
+                _order = par.group(1) or 'n'
+                _morality = par.group(2) or 'n'
+                _order = _order[0].replace('t', 'n')
+                _morality = _morality[0]
                 self._alignment = (_order, _morality)
             else:
                 _log.warning('Invalid data. Ignoring %s', value)
