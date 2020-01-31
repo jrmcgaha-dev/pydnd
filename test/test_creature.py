@@ -2,7 +2,8 @@ from pydnd import creature
 
 
 def test_imports():
-    assert 'typing' in creature.__dict__
+    assert hasattr(creature, 'logging')
+    assert hasattr(creature, 'typing')
 
 
 def test_class_existence():
