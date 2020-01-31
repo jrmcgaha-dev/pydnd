@@ -17,13 +17,6 @@ def test_class_attribute_existence():
     assert hasattr(creature.Creature, '_alignment_convert')
 
 
-def test_alignment_convert_composition():
-    assert 'l' in creature.Creature._alignment_convert.keys()
-    assert creature.Creature._alignment_convert.get('l') == 'Lawful'
-    assert 'lawful' in creature.Creature._alignment_convert.keys()
-    assert creature.Creature._alignment_convert.get('lawful') == 'l'
-
-
 def test_class_instance_attribute_existence():
     empty_creature = creature.Creature()
     assert hasattr(empty_creature, 'name')
