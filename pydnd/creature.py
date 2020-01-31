@@ -5,6 +5,7 @@ import typing
 logging.basicConfig(level=logging.DEBUG)
 # TODO: Remove above before develop merge
 _log = logging.getLogger(__name__)
+_log.debug("Establish that logger is active")
 
 
 class Creature:
