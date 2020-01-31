@@ -45,7 +45,7 @@ def test_class_instance_attribute_existence():
 def test_alignment_set_get():
     empty_creature = creature.Creature()
     empty_creature.alignment = 'lg'
-    assert empty_creature._alignment == 'l', 'g'
+    assert empty_creature._alignment == ('l', 'g')
     assert empty_creature.alignment == 'Lawful Good'
 
 
