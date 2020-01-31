@@ -2,6 +2,11 @@ import logging
 import typing
 
 
+logging.basicConfig(level=logging.DEBUG)
+# TODO: Remove above before develop merge
+_log = logging.getLogger(__name__)
+
+
 class Creature:
 
     _default_ac = 10
