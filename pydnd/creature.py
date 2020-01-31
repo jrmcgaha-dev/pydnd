@@ -24,7 +24,7 @@ class Creature:
         self.name: str = ''
         self.size: str = ''
         self.type: str = ''
-        self.alignment: typing.Tuple[str, str] = ('', '')
+        self._alignment: typing.Tuple[str, str] = ('', '')
         self.armor_class: int = 10
         self.hitpoints: int = 0
         self.speed: int = 0
