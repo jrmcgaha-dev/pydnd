@@ -4,14 +4,14 @@ import typing
 
 logging.basicConfig(level=logging.DEBUG)
 # TODO: Remove above before develop merge
-_log = logging.getLogger(__name__)
+_log: logging.Logger = logging.getLogger(__name__)
 _log.debug("Establish that logger is active")
 
 
 class Creature:
 
-    _default_ac = 10
-    _alignment_hash = {
+    _default_ac: int = 10
+    _alignment_hash: typing.Dict[str, int] = {
         'l': 0,
         'g': 0,
         'n': 1,
@@ -19,6 +19,16 @@ class Creature:
         'e': 2,
         'u': 255,
     }
+    _alignment_convert: typing.Dict[str, str] = {
+        'l': 'Lawful',
+        'g': 'Good',
+        'n': 'Neutral',
+        'e': 'Evil',
+        'c': 'Chaotic'
+    }
+    _alignment_convert.update(
+        {_val.lower(): _key for _key, _val in _alignment_convert.items()}
+    )
 
     def __init__(self):
         self.name: str = ''
