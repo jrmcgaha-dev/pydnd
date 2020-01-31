@@ -11,7 +11,7 @@ _log.debug("Establish that logger is active")
 
 class Creature:
 
-    _default_ac: int = 10
+    _base_ac: int = 10
     _alignment_hash: typing.Dict[str, int] = {
         'l': 0,
         'g': 0,
