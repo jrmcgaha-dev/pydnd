@@ -66,11 +66,13 @@ class Creature:
         else:
             if len(par) == 2:
                 par = tuple(par)
-            else:
+            elif ' ' in par:
                 par = tuple(
                     self._alignment_convert.get(item, '?')
                     for item in par.split(' ')
                 )
+            else:
+                par = (par, '')
             _order_check = par[0] not in ('l', 'n', 'c')
             _morality_check = par[1] not in ('g', 'n', 'e')
             if _order_check or _morality_check:
