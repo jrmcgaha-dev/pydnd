@@ -31,3 +31,24 @@ def test_class_instance_attribute_existence():
     assert hasattr(empty_creature, 'damage_immunities')
     assert hasattr(empty_creature, 'senses')
     assert hasattr(empty_creature, 'languages')
+
+
+def test_class_instance_property_alignment_coord():
+    empty_creature = creature.Creature()
+    assert hasattr(empty_creature, '_alignment_coord')
+    empty_creature.alignment = 'lg'
+    assert empty_creature._alignment_coord == (0, 0)
+    empty_creature.alignment = 'ce'
+    assert empty_creature._alignment_coord == (2, 2)
+    empty_creature.alignment = 'nn'
+    assert empty_creature._alignment_coord == (1, 1)
+    empty_creature.alignment = 'tn'
+    assert empty_creature._alignment_coord == (1, 1)
+    empty_creature.alignment = 'lawful good'
+    assert empty_creature._alignment_coord == (0, 0)
+    empty_creature.alignment = 'chaotic evil'
+    assert empty_creature._alignment_coord == (2, 2)
+    empty_creature.alignment = 'neutral neutral'
+    assert empty_creature._alignment_coord == (1, 1)
+    empty_creature.alignment = 'true neutral'
+    assert empty_creature._alignment_coord == (1, 1)
