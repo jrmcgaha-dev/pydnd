@@ -64,28 +64,40 @@ class Creature:
 
     @alignment.setter
     def alignment(self, value: str):
-        par = value.lower()
+        par = value.lower().strip(' ')
         if par == 'u' or par == 'unaligned':
             self._alignment = ('u', '')
         else:
-            if par == 'tn' or par == 'true neutral':
-                par = 'nn'
-            if len(par) == 2:
-                par = tuple(par)
-            elif ' ' in par:
-                par = tuple(
-                    self._alignment_convert.get(item, '?')
-                    for item in par.split(' ')
-                )
+            _re_pattern = (
+                "(lawful|neutral|chaotic|true|[clnt]){1}"
+                "\\s?"
+                "(good|neutral|evil|[gne]){1}"
+            )
+            par = re.match(_re_pattern, value)
+            if par is not None:
+                _order = par.group(1)[0].replace('t', 'n')
+                _morality = par.group(2)[0]
+                self._alignment = (_order, _morality)
             else:
-                par = (par, '')
-            _order_check = par[0] not in ('l', 'n', 'c')
-            _morality_check = par[1] not in ('g', 'n', 'e')
-            if _order_check or _morality_check:
-                _log.warning('Invalid alignment. Ignoring %s%s',
-                             *par)
-            else:
-                self._alignment = par
+                _log.warning('Invalid data. Ignoring %s', value)
+            # Below: Hard checks, Above: regex method
+            # if par == 'tn' or par == 'true neutral':
+            #     par = 'nn'
+            # if len(par) == 2:
+            #     par = tuple(par)
+            # elif ' ' in par:
+            #     par = tuple(
+            #         self._alignment_convert.get(item, '?')
+            #         for item in par.split(' ')
+            #     )
+            # else:
+            #     par = (par, '')
+            # _order_check = par[0] not in ('l', 'n', 'c')
+            # _morality_check = par[1] not in ('g', 'n', 'e')
+            # if _order_check or _morality_check:
+            #     _log.warning('Invalid alignment. Ignoring %s', value)
+            # else:
+            #     self._alignment = par
 
     @property
     def _alignment_coord(self):
