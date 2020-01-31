@@ -20,7 +20,7 @@ def test_class_instance_attribute_existence():
     assert hasattr(empty_creature, 'name')
     assert hasattr(empty_creature, 'size')
     assert hasattr(empty_creature, 'type')
-    assert hasattr(empty_creature, 'alignment')
+    assert hasattr(empty_creature, '_alignment')
     assert hasattr(empty_creature, 'armor_class')
     assert hasattr(empty_creature, 'hitpoints')
     assert hasattr(empty_creature, 'speed')
