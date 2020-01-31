@@ -64,6 +64,8 @@ class Creature:
         if par == 'u' or par == 'unaligned':
             self._alignment = ('u', '')
         else:
+            if par == 'tn' or par == 'true neutral':
+                par = 'nn'
             if len(par) == 2:
                 par = tuple(par)
             elif ' ' in par:
