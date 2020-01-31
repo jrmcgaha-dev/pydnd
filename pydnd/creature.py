@@ -49,5 +49,35 @@ class Creature:
         self.languages: typing.List[str] = list()
 
     @property
+    def alignment(self):
+        if self._alignment == ('', ''):
+            return 'Unaligned'
+        if self._alignment[0] == 'u':
+            return 'Unaligned'
+        _order_axis = self._alignment_convert.get(self._alignment[0])
+        _moral_axis = self._alignment_convert.get(self._alignment[1])
+        return ' '.join((_order_axis, _moral_axis)).title()
+
+    @alignment.setter
+    def alignment(self, value: str):
+        par = value.lower()
+        if par == 'u' or par == 'unaligned':
+            self._alignment = ('u', '')
+        else:
+            if len(par) == 2:
+                par = tuple(par)
+            else:
+                par = tuple(
+                    self._alignment_convert.get(item, '?')
+                    for item in par.split(' ')
+                )
+            _order_check = par[0] not in ('l', 'n', 'c')
+            _morality_check = par[1] not in ('g', 'n', 'e')
+            if _order_check or _morality_check:
+                _log.warning('Invalid alignment. Ignoring assignment.')
+            else:
+                self._alignment = par
+
+    @property
     def _alignment_coord(self):
         return None
