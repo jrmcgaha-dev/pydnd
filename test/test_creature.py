@@ -3,6 +3,7 @@ from pydnd import creature
 
 def test_imports():
     assert hasattr(creature, 'logging')
+    assert hasattr(creature, 're')
     assert hasattr(creature, 'typing')
 
 
