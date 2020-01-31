@@ -67,7 +67,7 @@ class Creature:
                 "\\s?"
                 "(good|neutral|evil|[gne]){1}"
             )
-            par = re.match(_re_pattern, value)
+            par = re.match(_re_pattern, par)
             if par is not None:
                 _order = par.group(1)[0].replace('t', 'n')
                 _morality = par.group(2)[0]
