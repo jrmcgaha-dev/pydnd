@@ -48,6 +48,17 @@ class Creature:
 
     @property
     def alignment(self):
+        """
+        Get or set alignment for creature. Setting is read in
+        law/chaos good/evil order (i.e. lawful good or lg would
+        work but good lawful would not)
+
+        Returns
+        -------
+        str
+            Formatted string representing alignment
+
+        """
         if self._alignment == ('', ''):
             return 'Unaligned'
         if self._alignment[0] == 'u':
