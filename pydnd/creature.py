@@ -80,24 +80,6 @@ class Creature:
                 self._alignment = (_order, _morality)
             else:
                 _log.warning('Invalid data. Ignoring %s', value)
-            # Below: Hard checks, Above: regex method
-            # if par == 'tn' or par == 'true neutral':
-            #     par = 'nn'
-            # if len(par) == 2:
-            #     par = tuple(par)
-            # elif ' ' in par:
-            #     par = tuple(
-            #         self._alignment_convert.get(item, '?')
-            #         for item in par.split(' ')
-            #     )
-            # else:
-            #     par = (par, '')
-            # _order_check = par[0] not in ('l', 'n', 'c')
-            # _morality_check = par[1] not in ('g', 'n', 'e')
-            # if _order_check or _morality_check:
-            #     _log.warning('Invalid alignment. Ignoring %s', value)
-            # else:
-            #     self._alignment = par
 
     @property
     def _alignment_coord(self):
