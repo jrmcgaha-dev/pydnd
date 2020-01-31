@@ -48,6 +48,8 @@ def test_alignment_set_get():
     empty_creature.alignment = 'lg'
     assert empty_creature._alignment == ('l', 'g')
     assert empty_creature.alignment == 'Lawful Good'
+    empty_creature.alignment = 'invalid'
+    assert empty_creature.alignment == 'Lawful Good'
 
 
 def test_class_instance_property_alignment_coord():
