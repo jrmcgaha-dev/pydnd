@@ -4,6 +4,14 @@ import typing
 class Creature:
 
     _default_ac = 10
+    _alignment_hash = {
+        'l': 0,
+        'g': 0,
+        'n': 1,
+        'c': 2,
+        'e': 2,
+        'u': 255,
+    }
 
     def __init__(self):
         self.name: str = ''
