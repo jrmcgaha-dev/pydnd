@@ -10,7 +10,7 @@ def test_class_existence():
 
 
 def test_class_attribute_existence():
-    assert hasattr(creature.Creature, '_base_ac')
+    assert hasattr(creature.Creature, '_default_ac')
 
 
 def test_class_instance_attribute_existence():
