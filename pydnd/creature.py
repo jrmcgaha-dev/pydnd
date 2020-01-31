@@ -27,12 +27,6 @@ class Creature:
         'e': 'Evil',
         'c': 'Chaotic'
     }
-    _alignment_convert.update(
-        {_val.lower(): _key for _key, _val in _alignment_convert.items()}
-    )
-    _alignment_convert.update(
-        {'true': 'n', 't': 'neutral'}
-    )
 
     def __init__(self):
         self.name: str = ''
