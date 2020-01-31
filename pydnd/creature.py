@@ -60,7 +60,7 @@ class Creature:
             Formatted string representing alignment
 
         """
-        _log.debug('_alignment = %s', self._alignment)
+        _log.debug('_alignment = %r', self._alignment)
         if self._alignment == ('', ''):
             return 'Unaligned'
         if self._alignment[0] == 'u':
@@ -71,7 +71,9 @@ class Creature:
 
     @alignment.setter
     def alignment(self, value: str):
+        _log.debug('value = %r', value)
         par = value.lower().strip(' ')
+        _log.debug('set par = %r', par)
         if par == 'u' or par == 'unaligned' or not par:
             self._alignment = ('u', '')
         else:
@@ -81,14 +83,19 @@ class Creature:
                 "(good|neutral|evil|[gne])?"
             )
             par = re.match(_re_pattern, par)
+            _log.debug('set par = %r', par)
+            _log.debug('par.group(0) = %r', par.group(0))
+            _log.debug('par.group(1) = %r', par.group(1))
+            _log.debug('par.group(2) = %r', par.group(2))
             if par.group(0):
                 _order = par.group(1) or 'n'
                 _morality = par.group(2) or 'n'
                 _order = _order[0].replace('t', 'n')
                 _morality = _morality[0]
                 self._alignment = (_order, _morality)
+                _log.debug('set self._alignment = %r', self._alignment)
             else:
-                _log.warning('Invalid data. Ignoring %s', value)
+                _log.warning('Invalid data. Ignoring %r', value)
 
     @property
     def _alignment_coord(self):
