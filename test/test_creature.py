@@ -87,3 +87,5 @@ def test_size_multipliter():
     assert empty_creature.size_multiplier == pow(2, 5)
     empty_creature.size = 'Medium+'
     assert empty_creature.size_multiplier == pow(2, 1)
+    empty_creature.size = 'Invalid'
+    assert empty_creature.size_multiplier == pow(2, 0)
