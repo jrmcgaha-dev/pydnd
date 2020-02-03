@@ -28,6 +28,14 @@ class Creature:
         'e': 'Evil',
         'c': 'Chaotic'
     }
+    _size_hash: typing.Dict[str, int] = {
+        'tiny': -1,
+        'small': 0,
+        'medium': 0,
+        'large': 1,
+        'huge': 2,
+        'gargantuan': 3,
+    }
 
     def __init__(self):
         self.name: str = ''
