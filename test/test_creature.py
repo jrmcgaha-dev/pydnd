@@ -73,3 +73,17 @@ def test_class_instance_property_alignment_coord():
     assert empty_creature._alignment_coord == (1, 1)
     empty_creature.alignment = 'true neutral'
     assert empty_creature._alignment_coord == (1, 1)
+
+
+def test_size_multipliter():
+    empty_creature = creature.Creature()
+    assert empty_creature.size == ''
+    assert empty_creature.size_multiplier == pow(2, 0)
+    empty_creature.size = 'Tiny'
+    assert empty_creature.size_multiplier == pow(2, -1)
+    empty_creature.size = 'Gargantuan'
+    assert empty_creature.size_multiplier == pow(2, 3)
+    empty_creature.size = 'Gargantuan++'
+    assert empty_creature.size_multiplier == pow(2, 5)
+    empty_creature.size = 'Medium+'
+    assert empty_creature.size_multiplier == pow(2, 1)
