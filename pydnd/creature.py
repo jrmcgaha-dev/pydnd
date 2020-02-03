@@ -60,6 +60,7 @@ class Creature:
             Formatted string representing alignment
 
         """
+        _log.debug('Entering alignment getter')
         _log.debug('_alignment = %r', self._alignment)
         if self._alignment == ('', ''):
             return 'Unaligned'
@@ -71,6 +72,7 @@ class Creature:
 
     @alignment.setter
     def alignment(self, value: str):
+        _log.debug('Entering alignment setter')
         _log.debug('value = %r', value)
         par = value.lower().strip(' ')
         _log.debug('set par = %r', par)
@@ -96,6 +98,7 @@ class Creature:
                 _log.debug('set self._alignment = %r', self._alignment)
             else:
                 _log.warning('Invalid data. Ignoring %r', value)
+        _log.debug('Exiting alignment setter')
 
     @property
     def _alignment_coord(self):
