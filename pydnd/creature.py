@@ -56,7 +56,7 @@ class Creature:
         self.languages: typing.List[str] = list()
 
     @property
-    def alignment(self):
+    def alignment(self) -> str:
         """
         Get or set alignment for creature. Setting is read in
         law/chaos good/evil order (i.e. lawful good or lg would
@@ -79,7 +79,7 @@ class Creature:
         return ' '.join((_order_axis, _moral_axis)).title()
 
     @alignment.setter
-    def alignment(self, value: str):
+    def alignment(self, value: str) -> typing.NoReturn:
         _log.debug('Entering alignment setter')
         _log.debug('value = %r', value)
         par = value.lower().strip(' ')
@@ -109,7 +109,7 @@ class Creature:
         _log.debug('Exiting alignment setter')
 
     @property
-    def _alignment_coord(self):
+    def _alignment_coord(self) -> typing.Tuple[int, int]:
         _order_coord = self._alignment_hash.get(self._alignment[0], 255)
         _morality_coord = self._alignment_hash.get(self._alignment[1], 255)
         return _order_coord, _morality_coord
