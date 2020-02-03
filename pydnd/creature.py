@@ -116,5 +116,20 @@ class Creature:
 
     @property
     def size_multiplier(self) -> int:
+        _log.debug("Entering size_multiplier")
         if not self.size:
             return 1
+        par = self.size.lower().strip(' ')
+        _log.debug("Stripped size: %s", par)
+        _normal_sizes_pattern = '|'.join(self._size_hash.keys())
+        _pattern = f"({_normal_sizes_pattern})(\\+*)"
+        _log.debug("Pattern used: %s", _pattern)
+        par = re.match(_pattern, par)
+        if par is None or not par.group(0):
+            _log.warning("Unable to parse size %s. Defaulting to 1", self.size)
+            return 1
+        _log.debug("Group 0: %s", par.group(0))
+        _log.debug("Group 1: %s", par.group(1))
+        _log.debug("Group 2: %s", par.group(2))
+        _base_size = self._size_hash.get(par.group(1), 0)
+        return pow(2, _base_size+len(par.group(2)))
