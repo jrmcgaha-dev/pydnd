@@ -137,7 +137,7 @@ class Creature:
     @property
     def languages(self):
         if not self._lang_list:
-            _log.debug("Empty _lang_list")
+            _log.debug("bool(_lang_list) == False")
             return ''
         _log.debug("self._lang_list == %s", self._lang_list)
         return ', '.join(self._lang_list)
