@@ -15,7 +15,7 @@ def test_class_attribute_existence():
     assert hasattr(creature.Creature, '_base_ac')
     assert hasattr(creature.Creature, '_alignment_hash')
     assert hasattr(creature.Creature, '_alignment_convert')
-    assert hasattr(creature.Creature, 'size_hash')
+    assert hasattr(creature.Creature, '_size_hash')
 
 
 def test_class_instance_attribute_existence():
