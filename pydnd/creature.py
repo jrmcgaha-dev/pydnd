@@ -148,3 +148,11 @@ class Creature:
         self._lang_list.append(par)
         _log.debug("self._lang_list == %r", self._lang_list)
         return self.languages
+
+    def remove_language(self, lang: str) -> str:
+        par = lang.lower().strip(' ')
+        _log.debug("set par = %r", par)
+        if par in self._lang_list:
+            self._lang_list.remove(par)
+            _log.debug("par found and removed")
+        return self.languages
