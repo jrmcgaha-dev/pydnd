@@ -156,3 +156,6 @@ class Creature:
             self._lang_list.remove(par)
             _log.debug("par found and removed")
         return self.languages
+
+    def clear_languages(self) -> typing.NoReturn:
+        self._lang_list.clear()
