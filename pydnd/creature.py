@@ -140,4 +140,4 @@ class Creature:
             _log.debug("bool(_lang_list) == False")
             return ''
         _log.debug("self._lang_list == %s", self._lang_list)
-        return ', '.join(self._lang_list)
+        return ', '.join(map(str.title, self._lang_list))
