@@ -141,3 +141,10 @@ class Creature:
             return ''
         _log.debug("self._lang_list == %s", self._lang_list)
         return ', '.join(map(str.title, self._lang_list))
+
+    def add_language(self, lang: str) -> str:
+        par = lang.lower().strip(' ')
+        _log.debug("set par = %r", par)
+        self._lang_list.append(par)
+        _log.debug("self._lang_list == %r", self._lang_list)
+        return self.languages
