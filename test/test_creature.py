@@ -89,3 +89,18 @@ def test_size_multipliter():
     assert empty_creature.size_multiplier == pow(2, 1)
     empty_creature.size = 'Invalid'
     assert empty_creature.size_multiplier == pow(2, 0)
+
+
+def test_languages_interaction():
+    empty_creature = creature.Creature()
+    assert empty_creature.languages == ''
+    empty_creature.add_language('Common')
+    assert empty_creature.languages == 'Common'
+    empty_creature.add_language('Abyssal')
+    assert empty_creature.languages == 'Common, Abyssal'
+    empty_creature.remove_language('Common')
+    assert empty_creature.languages == 'Abyssal'
+    empty_creature.add_language('cOMMON')
+    assert empty_creature.languages == 'Abyssal, Common'
+    empty_creature.clear_languages()
+    assert empty_creature.languages == ''
