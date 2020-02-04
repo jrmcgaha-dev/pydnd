@@ -53,7 +53,7 @@ class Creature:
         self.damage_vulnerabilities: typing.List[str] = list()
         self.damage_immunities: typing.List[str] = list()
         self.senses: typing.List[str] = list()
-        self.languages: typing.List[str] = list()
+        self._lang_list: typing.List[str] = list()
 
     @property
     def alignment(self) -> str:
