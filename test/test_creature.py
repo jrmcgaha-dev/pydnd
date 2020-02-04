@@ -34,7 +34,7 @@ def test_class_instance_attribute_existence():
     assert hasattr(empty_creature, 'damage_vulnerabilities')
     assert hasattr(empty_creature, 'damage_immunities')
     assert hasattr(empty_creature, 'senses')
-    assert hasattr(empty_creature, 'languages')
+    assert hasattr(empty_creature, '_lang_list')
     assert hasattr(empty_creature, 'size_multiplier')
 
 
