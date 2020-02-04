@@ -120,17 +120,17 @@ class Creature:
         if not self.size:
             return 1
         par = self.size.lower().strip(' ')
-        _log.debug("Stripped size: %s", par)
+        _log.debug("Stripped size: %r", par)
         _normal_sizes_pattern = '|'.join(self._size_hash.keys())
         _pattern = f"({_normal_sizes_pattern})(\\+*)"
-        _log.debug("Pattern used: %s", _pattern)
+        _log.debug("Pattern used: %r", _pattern)
         par = re.match(_pattern, par)
         if par is None or not par.group(0):
-            _log.warning("Unable to parse size %s. Defaulting to 1", self.size)
+            _log.warning("Unable to parse size %r. Defaulting to 1", self.size)
             return 1
-        _log.debug("Group 0: %s", par.group(0))
-        _log.debug("Group 1: %s", par.group(1))
-        _log.debug("Group 2: %s", par.group(2))
+        _log.debug("Group 0: %r", par.group(0))
+        _log.debug("Group 1: %r", par.group(1))
+        _log.debug("Group 2: %r", par.group(2))
         _base_size = self._size_hash.get(par.group(1), 0)
         return pow(2, _base_size+len(par.group(2)))
 
@@ -139,7 +139,7 @@ class Creature:
         if not self._lang_list:
             _log.debug("bool(_lang_list) == False")
             return ''
-        _log.debug("self._lang_list == %s", self._lang_list)
+        _log.debug("self._lang_list == %r", self._lang_list)
         return ', '.join(map(str.title, self._lang_list))
 
     def add_language(self, lang: str) -> str:
