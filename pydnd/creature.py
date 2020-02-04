@@ -133,3 +133,9 @@ class Creature:
         _log.debug("Group 2: %s", par.group(2))
         _base_size = self._size_hash.get(par.group(1), 0)
         return pow(2, _base_size+len(par.group(2)))
+
+    @property
+    def languages(self):
+        if not self._lang_list:
+            return ''
+        return ', '.join(self._lang_list)
