@@ -22,3 +22,4 @@ def test_roll_d():
     assert dice_bag._roll_d(1) == 1
     assert 1 <= dice_bag._roll_d(10) <= 10
     assert 1 <= dice_bag._roll_d(1000) <= 1000
+    assert dice_bag._roll_d(-1) == 0
