@@ -49,6 +49,10 @@ def roll(dice: str) -> int:
     _log.debug("set _dice = %r", _dice)
     _static = re.findall(_static_pattern, par)
     _log.debug("set _static = %r", _static)
-    if not (_dice and _static):
+    if not (_dice or _static):
         _log.warning("Failed to parse input %r", dice)
         return 0
+    _collect_rolls = 0
+    for _roll in _dice:
+        _collect_rolls += _dice_pool(*map(int, _roll))
+    return _collect_rolls + sum(map(int, _static))
