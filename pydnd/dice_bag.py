@@ -18,3 +18,35 @@ def _roll_d(m_val: int) -> int:
         return 0
     _log.debug("returning random.randint(1, %r)", m_val)
     return random.randint(1, m_val)
+
+
+def _dice_pool(num: int, val: int) -> int:
+    _log.debug("input: num = %r, val = %r", num, val)
+    _res = sorted([_roll_d(val) for _ in range(num)])
+    _log.debug('set res = %r', _res)
+    _log.info("%sd%s: %s", num, val, ', '.join(map(str, _res)))
+    return sum(_res)
+
+
+_dice_pattern = r"([\+\-]\d+)d(\d+)"
+_static_pattern = r"[\+\-]\d+(?=[\+\-])"
+
+
+def roll(dice: str) -> int:
+    par = dice.lower().replace(' ', '')
+    # normalize the input
+    _log.debug("set par = %r", par)
+    if par[0] not in '+-':
+        par = '+' + par
+        _log.debug("change par to %r", par)
+        # tweak input to play nice with re.findall and our pattern
+    par += '+0'
+    _log.debug("change par to %r", par)
+    # one last tweak for helping the pattern
+    _dice = re.findall(_dice_pattern, par)
+    _log.debug("set _dice = %r", _dice)
+    _static = re.findall(_static_pattern, par)
+    _log.debug("set _static = %r", _static)
+    if not (_dice and _static):
+        _log.warning("Failed to parse input %r", dice)
+        return 0
