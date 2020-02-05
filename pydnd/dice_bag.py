@@ -22,10 +22,12 @@ def _roll_d(m_val: int) -> int:
 
 def _dice_pool(num: int, val: int) -> int:
     _log.debug("input: num = %r, val = %r", num, val)
-    _res = sorted([_roll_d(val) for _ in range(num)])
+    _num = abs(num)
+    _res = sorted([_roll_d(val) for _ in range(_num)])
     _log.debug('set res = %r', _res)
-    _log.info("%sd%s: %s", num, val, ', '.join(map(str, _res)))
-    return sum(_res)
+    _log.info("%sd%s: %s", _num, val, ', '.join(map(str, _res)))
+    _sign = num // _num
+    return _sign * sum(_res)
 
 
 _dice_pattern = r"([\+\-]\d+)d(\d+)"
