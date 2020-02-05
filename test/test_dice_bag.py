@@ -29,3 +29,15 @@ def test_roll_d():
     assert 1 <= dice_bag._roll_d(10) <= 10
     assert 1 <= dice_bag._roll_d(1000) <= 1000
     assert dice_bag._roll_d(-1) == 0
+
+
+def test_roll():
+    if debug_enabled:
+        print()
+    assert hasattr(dice_bag, 'roll')
+    assert 1 <= dice_bag.roll('1d20') <= 20
+    assert 4 <= dice_bag.roll('1d20+3') <= 23
+    assert 3 <= dice_bag.roll('3d6') <= 18
+    complex_pattern = "1d20+5+1+2d6+15d4-2d10-30 + 2"
+    assert -24 <= dice_bag.roll(complex_pattern) <= 68
+    assert dice_bag.roll('apple') == 0
