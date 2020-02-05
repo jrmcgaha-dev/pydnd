@@ -41,3 +41,12 @@ def test_roll():
     complex_pattern = "1d20+5+1+2d6+15d4-2d10-30 + 2"
     assert -24 <= dice_bag.roll(complex_pattern) <= 68
     assert dice_bag.roll('apple') == 0
+
+
+def test_dice_pool():
+    if debug_enabled:
+        print()
+    assert hasattr(dice_bag, '_dice_pool')
+    assert 1 <= dice_bag._dice_pool(1, 20) <= 20
+    assert 2 <= dice_bag._dice_pool(2, 20) <= 40
+    assert 5 <= dice_bag._dice_pool(5, 4) <= 20
