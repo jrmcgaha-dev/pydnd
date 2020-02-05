@@ -38,6 +38,7 @@ def test_dice_pool():
     assert 1 <= dice_bag._dice_pool(1, 20) <= 20
     assert 2 <= dice_bag._dice_pool(2, 20) <= 40
     assert 5 <= dice_bag._dice_pool(5, 4) <= 20
+    assert -20 <= dice_bag._dice_pool(-1, 20) <= -1
 
 
 def test_roll():
