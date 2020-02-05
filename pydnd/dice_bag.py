@@ -35,6 +35,32 @@ _static_pattern = r"[\+\-]\d+(?=[\+\-])"
 
 
 def roll(dice: str) -> int:
+    """
+    Produces rolled result from provided string representation
+    of roll parameters
+
+    Parameters
+    ----------
+    dice: str
+        Roll parameters
+
+    Returns
+    -------
+    int
+        Value produced from rolling based on parameters
+
+    Examples
+    --------
+    >>> roll('1d20') in range(1, 20+1)
+    True
+    >>> roll('1d20+5') in range(6, 26+1)
+    True
+    >>> roll('2d6+4d8+4') in range(10, 48+1)
+    True
+    >>> roll('1d4-1') in range(0, 3+1)
+    True
+
+    """
     par = dice.lower().replace(' ', '')
     # normalize the input
     _log.debug("set par = %r", par)
