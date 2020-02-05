@@ -1,5 +1,7 @@
 from pydnd import dice_bag
 
+debug_enabled = True
+
 
 def test_imports():
     assert hasattr(dice_bag, 'logging')
@@ -9,7 +11,9 @@ def test_imports():
 
 def test_logging():
     assert hasattr(dice_bag, '_log')
-    if dice_bag._log.isEnabledFor(dice_bag.logging.DEBUG):
+    global debug_enabled
+    debug_enabled = dice_bag._log.isEnabledFor(dice_bag.logging.DEBUG)
+    if debug_enabled:
         print()
         dice_bag._log.debug('Change level to INFO before merge')
     assert dice_bag._log.isEnabledFor(dice_bag.logging.INFO)
@@ -17,6 +21,8 @@ def test_logging():
 
 
 def test_roll_d():
+    if debug_enabled:
+        print()
     assert hasattr(dice_bag, '_roll_d')
     assert callable(dice_bag._roll_d)
     assert dice_bag._roll_d(1) == 1
