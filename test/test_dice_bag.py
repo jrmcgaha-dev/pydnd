@@ -44,6 +44,8 @@ def test_roller_roll():
 
 
 def test_roller_parse_command():
+    assert hasattr(dice_bag.Roller, '_command_pattern')
+    assert hasattr(dice_bag.Roller, '_command_compiled')
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_parse_command')
     assert callable(sample_roller._parse_command)
