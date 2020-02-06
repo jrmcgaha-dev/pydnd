@@ -18,3 +18,13 @@ def test_logging():
         dice_bag._log.debug('Change level to INFO before merge')
     assert dice_bag._log.isEnabledFor(dice_bag.logging.INFO)
     assert dice_bag._log.isEnabledFor(dice_bag.logging.WARNING)
+
+
+def test_roller_existence():
+    assert hasattr(dice_bag, 'Roller')
+    assert callable(dice_bag.Roller)
+    try:
+        sample_roller = dice_bag.Roller()
+    except AttributeError:
+        assert False, "Roller __init__ failed"
+    assert isinstance(sample_roller, dice_bag.Roller)
