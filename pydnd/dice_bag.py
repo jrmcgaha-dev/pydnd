@@ -10,3 +10,8 @@ import re
 logging.basicConfig(level=logging.DEBUG)
 # Remove above before merge
 _log = logging.getLogger(__name__)
+
+
+class Roller:
+    def __init__(self):
+        pass
