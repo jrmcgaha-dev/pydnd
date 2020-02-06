@@ -7,6 +7,7 @@ def test_imports():
     assert hasattr(dice_bag, 'logging')
     assert hasattr(dice_bag, 'random')
     assert hasattr(dice_bag, 're')
+    assert hasattr(dice_bag, 'typing')
 
 
 def test_logging():
