@@ -46,8 +46,6 @@ def test_roller_roll():
 def test_roller_parse_command():
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_parse_command')
-    assert hasattr(sample_roller, 'previous_command')
-    assert isinstance(sample_roller.previous_command, list)
     assert callable(sample_roller._parse_command)
     static_command = ('_static', '5')
     assert sample_roller._parse_command('5') == static_command
