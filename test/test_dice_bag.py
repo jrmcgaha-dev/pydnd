@@ -47,7 +47,7 @@ def test_roller_parse_command():
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_parse_command')
     assert callable(sample_roller._parse_command)
-    static_command = ('_static', '5')
+    static_command = ('_static', 5)
     assert sample_roller._parse_command('5') == static_command
     roll_command = ('_gen_pool', (1, 20), 'comment', 'attack')
     assert sample_roller._parse_command('1d20[attack]') == roll_command
