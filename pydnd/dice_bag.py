@@ -1,3 +1,7 @@
+"""
+The dice_bag module is designed to handle parsing of roll commands
+based upon a limited set of the commands available on roll20.net
+"""
 import logging
 import random
 import re
