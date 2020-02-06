@@ -28,3 +28,9 @@ def test_roller_existence():
     except AttributeError:
         assert False, "Roller __init__ failed"
     assert isinstance(sample_roller, dice_bag.Roller)
+
+
+def test_roller_init():
+    sample_roller = dice_bag.Roller()
+    assert hasattr(sample_roller, '_randint')
+    assert dice_bag.random.randint == sample_roller._randint
