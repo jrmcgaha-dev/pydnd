@@ -41,3 +41,23 @@ def test_roller_roll():
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, 'roll')
     assert 1 <= sample_roller.roll('1d20') <= 20
+
+
+def test_roller_parse_command():
+    sample_roller = dice_bag.Roller()
+    assert hasattr(sample_roller, '_parse_command')
+    assert hasattr(sample_roller, 'previous_command')
+    assert isinstance(sample_roller.previous_command, list)
+    assert callable(sample_roller._parse_command)
+    static_command = ('_static', '5', '')
+    assert sample_roller._parse_command('5') == static_command
+    roll_command = ('_gen_pool', (1, 20), 'comment', 'attack')
+    assert sample_roller._parse_command('1d20[attack]') == roll_command
+    keep_command = ('_gen_pool', (2, 20), 'keep', (1, True))
+    assert sample_roller._parse_command('2d20k1') == keep_command
+    lowest_command = ('_gen_pool', (2, 20), 'keep', (1, False))
+    assert sample_roller._parse_command('2d20kl1') == lowest_command
+    drop_command = ('_gen_pool', (4, 6), 'keep', (3, True))
+    assert sample_roller._parse_command('4d6d1') == drop_command
+    highest_command = ('_gen_pool', (4, 6), 'keep', (3, False))
+    assert sample_roller._parse_command('4d6dh1') == highest_command
