@@ -35,3 +35,9 @@ def test_roller_init():
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_randint')
     assert dice_bag.random.randint == sample_roller._randint
+
+
+def test_roller_roll():
+    sample_roller = dice_bag.Roller()
+    assert hasattr(sample_roller, 'roll')
+    assert 1 <= sample_roller.roll('1d20') <= 20
