@@ -49,8 +49,8 @@ def test_roller_parse_command():
     assert hasattr(dice_bag.Roller, '_parse_command')
     assert callable(dice_bag.Roller._parse_command)
     static_test = '5+3'
-    static_result = (5, 3)
+    static_result = (5, 3, '')
     assert dice_bag.Roller._parse_command(static_test) == static_result
     dice_test = '1d20'
     dice_result = dice_bag.Roller._action_compiled.fullmatch(dice_test)
-    assert dice_bag.Roller._parse_command(dice_test) == (dice_result,)
+    assert dice_bag.Roller._parse_command(dice_test) == (dice_result, '')
