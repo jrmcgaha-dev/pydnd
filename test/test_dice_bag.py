@@ -65,14 +65,15 @@ def test_resolve_action():
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_resolve_action')
     assert callable(sample_roller._resolve_action)
-    assert 1 <= sample_roller._resolve_action('1d20') <= 20
-    assert sample_roller._resolve_action(5) == 5
+    convert = lambda x: sample_roller._parse_command(x)[0]
+    assert 1 <= sample_roller._resolve_action(convert('1d20')) <= 20
+    assert sample_roller._resolve_action(convert('5')) == 5
     assert sample_roller._resolve_action('Message') == 'Message'
-    assert 3 <= sample_roller._resolve_action('1d8r2') <= 8
-    assert 1 <= sample_roller._resolve_action('1d8ro2') <= 8
-    assert 3 <= sample_roller._resolve_action('4d6d1') <= 18
-    assert 1 <= sample_roller._resolve_action('4d6k1') <= 6
-    assert 2 <= sample_roller._resolve_action('4d6r1k1') <= 6
+    assert 3 <= sample_roller._resolve_action(convert('1d8r2')) <= 8
+    assert 1 <= sample_roller._resolve_action(convert('1d8ro2')) <= 8
+    assert 3 <= sample_roller._resolve_action(convert('4d6d1')) <= 18
+    assert 1 <= sample_roller._resolve_action(convert('4d6k1')) <= 6
+    assert 2 <= sample_roller._resolve_action(convert('4d6r1k1')) <= 6
 
 
 def test_dice_pool():
