@@ -65,3 +65,21 @@ class Roller:
         _log.debug("After reroll once and no sort: _pool == %r", _pool)
         _pool.sort()
         return tuple(_pool)
+
+    @staticmethod
+    def _pool_dk(pool: typing.Tuple[int, ...],
+                 mode: str,
+                 num: int) -> typing.Tuple[int, ...]:
+        _log.debug("Input: %r, %r, %r", pool, mode, num)
+        if mode == 'd' or mode == 'dl':
+            res = pool[num:]
+        elif mode == 'dh':
+            res = pool[:-num]
+        elif mode == 'k' or mode == 'kh':
+            res = pool[-num:]
+        else:
+            res = pool[:num]
+        if not res:
+            _log.debug('All dropped. Returning (0, 0)')
+            return 0, 0
+        return res
