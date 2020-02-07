@@ -65,7 +65,10 @@ def test_resolve_action():
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_resolve_action')
     assert callable(sample_roller._resolve_action)
-    convert = lambda x: sample_roller._parse_command(x)[0]
+
+    def convert(val):
+        return sample_roller._parse_command(val)[0]
+
     assert 1 <= sample_roller._resolve_action(convert('1d20')) <= 20
     assert sample_roller._resolve_action(convert('5')) == 5
     assert sample_roller._resolve_action('Message') == 'Message'
