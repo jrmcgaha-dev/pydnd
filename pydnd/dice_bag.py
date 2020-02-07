@@ -12,6 +12,8 @@ logging.basicConfig(level=logging.DEBUG)
 # Remove above before merge
 _log = logging.getLogger(__name__)
 RANDINT_FUNCTION = typing.Callable[[int, int], int]
+Action = typing.Union[int, str, type(re.match(".*", "type"))]
+Resolution = typing.Union[int, str]
 
 
 class Roller:
@@ -83,3 +85,6 @@ class Roller:
             _log.debug('All dropped. Returning (0, 0)')
             return 0, 0
         return res
+
+    def _resolve_action(self, action: Action) -> Resolution:
+        pass
