@@ -39,3 +39,20 @@ class Roller:
             for item in _actions
         )
         return tuple(_parsed) + (_message,)
+
+    def _dice_pool(self,
+                   num_dice: int,
+                   sides: int,
+                   reroll: int = 0,
+                   once: bool = False) -> typing.Tuple[int, ...]:
+        lowest = min(1 if once else reroll+1, sides)
+        _pool = [self._randint(lowest, sides) for _ in range(num_dice)]
+        _pool.sort()
+        if not once:
+            return tuple(_pool)
+        for ind, val in enumerate(_pool):
+            if val > reroll:
+                break
+            _pool[ind] = self._randint(lowest, sides)
+        _pool.sort()
+        return tuple(_pool)
