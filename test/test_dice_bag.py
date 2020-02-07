@@ -55,3 +55,34 @@ def test_roller_parse_command():
     dice_result = dice_bag.Roller._action_compiled.fullmatch(dice_test)
     _experiment = dice_bag.Roller._parse_command(dice_test)
     assert dice_result.groups() == _experiment[0].groups()
+
+
+def test_resolve_action():
+    sample_roller = dice_bag.Roller()
+    assert hasattr(sample_roller, '_resolve_action')
+    assert callable(sample_roller._resolve_action)
+    assert 1 <= sample_roller._resolve_action('1d20') <= 20
+    assert sample_roller._resolve_action(5) == 5
+    assert sample_roller._resolve_action('Message') == 'Message'
+    assert 3 <= sample_roller._resolve_action('1d8r2') <= 8
+    assert 1 <= sample_roller._resolve_action('1d8ro2') <= 8
+    assert 3 <= sample_roller._resolve_action('4d6d1') <= 18
+    assert 1 <= sample_roller._resolve_action('4d6k1') <= 6
+    assert 2 <= sample_roller._resolve_action('4d6r1k1') <= 6
+
+
+def test_dice_pool():
+    sample_roller = dice_bag.Roller()
+    assert hasattr(sample_roller, '_dice_pool')
+    assert callable(sample_roller._dice_pool)
+    single_pool = sample_roller._dice_pool(1, 20)
+    assert isinstance(single_pool, list)
+    assert single_pool
+    assert isinstance(single_pool[0], int)
+    assert 1 <= single_pool[0] <= 20
+    many_reroll = sample_roller._dice_pool(2, 10, 1)
+    assert many_reroll
+    assert all(2 <= item <= 10 for item in many_reroll)
+    single_reroll = sample_roller._dice_pool(2, 10, 2, True)
+    assert single_reroll
+    assert all(1 <= item <= 10 for item in single_reroll)
