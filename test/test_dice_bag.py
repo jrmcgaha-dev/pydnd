@@ -76,7 +76,7 @@ def test_dice_pool():
     assert hasattr(sample_roller, '_dice_pool')
     assert callable(sample_roller._dice_pool)
     single_pool = sample_roller._dice_pool(1, 20)
-    assert isinstance(single_pool, list)
+    assert isinstance(single_pool, tuple)
     assert single_pool
     assert isinstance(single_pool[0], int)
     assert 1 <= single_pool[0] <= 20
