@@ -19,7 +19,7 @@ Resolution = typing.Union[int, str]
 class Roller:
 
     _action_pattern = (
-        "(\\d+)d(\\d+)"
+        "(-)?(\\d+)d(\\d+)"
         "(r(?P<once>o)?(?P<reroll>\\d+))?"
         "((?P<dk>[dk][hl]?)(?P<dk_num>\\d+))?"
     )
@@ -35,7 +35,7 @@ class Roller:
         _command, _message = command.split(' ', 1)
         _log.debug("_command == %r", _command)
         _log.debug("_message == %r", _message)
-        _command = str.replace(_command, '-', '+-')
+        _command = _command[0] + str.replace(_command[1:], '-', '+-')
         _log.debug("- to +-: _command == %r", _command)
         _actions = _command.split('+')
         _log.debug("_actions == %r", _actions)
@@ -87,4 +87,30 @@ class Roller:
         return res
 
     def _resolve_action(self, action: Action) -> Resolution:
-        pass
+        if isinstance(action, (int, str)):
+            _log.debug("Action `%r` requires no resolving", action)
+            return action
+        _num_dice = int(action.group(2))
+        _num_sides = int(action.group(3))
+        _reroll = int(action.group('reroll') or 0)
+        _once = bool(action.group('once'))
+        pool = self._dice_pool(_num_dice,
+                               _num_sides,
+                               _reroll,
+                               _once)
+        if action.group('dk'):
+            _log.debug("pre-drop pool: %r", pool)
+            results = self._pool_dk(pool,
+                                    action.group('dk'),
+                                    int(action.group('dk_num')))
+        else:
+            results = pool
+        pretty_results = ', '.join(map(str, results))
+        total = sum(results)
+        if action.group(1):
+            total *= -1
+        _log.info(" %s : %s => %s",
+                  action.group(0),
+                  pretty_results,
+                  total)
+        return total
