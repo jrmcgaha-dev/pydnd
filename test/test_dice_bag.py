@@ -53,4 +53,5 @@ def test_roller_parse_command():
     assert dice_bag.Roller._parse_command(static_test) == static_result
     dice_test = '1d20'
     dice_result = dice_bag.Roller._action_compiled.fullmatch(dice_test)
-    assert dice_bag.Roller._parse_command(dice_test) == (dice_result, '')
+    _experiment = dice_bag.Roller._parse_command(dice_test)
+    assert dice_result.groups() == _experiment[0].groups()
