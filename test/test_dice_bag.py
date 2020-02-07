@@ -78,6 +78,7 @@ def test_resolve_action():
     assert 3 <= sample_roller._resolve_action(convert('4d6d1')) <= 18
     assert 1 <= sample_roller._resolve_action(convert('4d6k1')) <= 6
     assert 2 <= sample_roller._resolve_action(convert('4d6r1k1')) <= 6
+    assert -10 <= sample_roller._resolve_action(convert('-1d10')) <= -1
 
 
 def test_dice_pool():
