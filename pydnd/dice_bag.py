@@ -119,5 +119,6 @@ class Roller:
         _prep_input = self._parse_command(input_)
         _results = tuple(map(self._resolve_action, _prep_input))
         _total = sum(_results[:-1])
-        _log.info(" Total: %s Message: %s", _total, _results[-1])
+        if _results[-1]:
+            _log.info(" Total: %s Message: %s", _total, _results[-1])
         return _total
