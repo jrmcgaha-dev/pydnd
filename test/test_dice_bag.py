@@ -123,5 +123,5 @@ def test_pool_dk():
     assert k_one == spool[-1:]
     assert kh_one == k_one
     assert kl_one == spool[:1]
-    assert d_all == (0,)
+    assert d_all == (0, 0)
     assert k_all == spool
