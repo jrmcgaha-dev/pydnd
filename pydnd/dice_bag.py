@@ -15,13 +15,27 @@ RANDINT_FUNCTION = typing.Callable[[int, int], int]
 
 
 class Roller:
+
+    _action_pattern = (
+        "(\\d+)d(\\d+)"
+        "(r(?P<once>o)?(?P<reroll>\\d+))?"
+        "((?P<dk>[dk][hl]?)(?P<dk_num>\\d+))?"
+    )
+    _action_compiled = re.compile(_action_pattern)
+
     def __init__(self, randint_function: RANDINT_FUNCTION = random.randint):
         self._randint = randint_function
 
-    def _parse_command(self, command: str) -> typing.Tuple[typing.Tuple, str]:
-        actions, message = (command+' ').split(' ', 1)
-        _log.debug("set actions = %r", actions)
-        _log.debug("set message = %r", message)
-        actions = str.replace(actions, '-', '+-')
-        queue_actions = actions.split('+')
-        return tuple()
+    @staticmethod
+    def _parse_command(command: str) -> typing.Tuple:
+        command = command + ' '
+        _command, _message = command.split(' ', 1)
+        _command = str.replace(_command, '-', '+-')
+        _actions = _command.split('+')
+        _parsed = (
+            int(item)
+            if re.fullmatch('\\d+', item)
+            else Roller._action_compiled.fullmatch(item)
+            for item in _actions
+        )
+        return tuple(_parsed) + (_message,)
