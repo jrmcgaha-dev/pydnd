@@ -44,6 +44,8 @@ def test_roller_roll():
 
 
 def test_roller_parse_command():
+    if debug_enabled:
+        print()
     assert hasattr(dice_bag.Roller, '_action_pattern')
     assert hasattr(dice_bag.Roller, '_action_compiled')
     assert hasattr(dice_bag.Roller, '_parse_command')
@@ -58,6 +60,8 @@ def test_roller_parse_command():
 
 
 def test_resolve_action():
+    if debug_enabled:
+        print()
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_resolve_action')
     assert callable(sample_roller._resolve_action)
@@ -72,6 +76,8 @@ def test_resolve_action():
 
 
 def test_dice_pool():
+    if debug_enabled:
+        print()
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_dice_pool')
     assert callable(sample_roller._dice_pool)
@@ -89,6 +95,8 @@ def test_dice_pool():
 
 
 def test_pool_dk():
+    if debug_enabled:
+        print()
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_pool_dk')
     assert callable(sample_roller._pool_dk)
