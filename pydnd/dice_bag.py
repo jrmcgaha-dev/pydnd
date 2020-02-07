@@ -121,4 +121,6 @@ class Roller:
         _total = sum(_results[:-1])
         if _results[-1]:
             _log.info(" Total: %s Message: %s", _total, _results[-1])
+        else:
+            _log.info(" Total: %s", _total)
         return _total
