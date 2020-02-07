@@ -86,3 +86,34 @@ def test_dice_pool():
     single_reroll = sample_roller._dice_pool(2, 10, 2, True)
     assert single_reroll
     assert all(1 <= item <= 10 for item in single_reroll)
+
+
+def test_pool_dk():
+    sample_roller = dice_bag.Roller()
+    assert hasattr(sample_roller, '_pool_dk')
+    assert callable(sample_roller._pool_dk)
+    spool = (1, 2, 3, 4, 5, 6)
+    d_one = sample_roller._pool_dk(spool, 'd', 1)
+    dl_one = sample_roller._pool_dk(spool, 'dl', 1)
+    dh_one = sample_roller._pool_dk(spool, 'dh', 1)
+    k_one = sample_roller._pool_dk(spool, 'k', 1)
+    kh_one = sample_roller._pool_dk(spool, 'kh', 1)
+    kl_one = sample_roller._pool_dk(spool, 'kl', 1)
+    d_all = sample_roller._pool_dk(spool, 'd', 7)
+    k_all = sample_roller._pool_dk(spool, 'k', 7)
+    assert all((d_one,
+                dl_one,
+                dh_one,
+                k_one,
+                kh_one,
+                kl_one,
+                d_all,
+                k_all))
+    assert d_one == spool[1:]
+    assert dl_one == d_one
+    assert dh_one == spool[:-1]
+    assert k_one == spool[-1:]
+    assert kh_one == k_one
+    assert kl_one == spool[:1]
+    assert d_all == (0,)
+    assert k_all == spool
