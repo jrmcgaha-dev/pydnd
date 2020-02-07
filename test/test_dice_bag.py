@@ -38,6 +38,8 @@ def test_roller_init():
 
 
 def test_roller_roll():
+    if debug_enabled:
+        print()
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, 'roll')
     assert 1 <= sample_roller.roll('1d20') <= 20
