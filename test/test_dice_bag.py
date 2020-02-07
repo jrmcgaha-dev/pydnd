@@ -97,6 +97,7 @@ def test_dice_pool():
 def test_pool_dk():
     if debug_enabled:
         print()
+    assert hasattr(dice_bag.Roller, '_pool_dk')
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_pool_dk')
     assert callable(sample_roller._pool_dk)
