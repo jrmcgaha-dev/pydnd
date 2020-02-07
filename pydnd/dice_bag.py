@@ -26,8 +26,8 @@ class Roller:
     def __init__(self, randint_function: RANDINT_FUNCTION = random.randint):
         self._randint = randint_function
 
-    @staticmethod
-    def _parse_command(command: str) -> typing.Tuple:
+    @classmethod
+    def _parse_command(cls, command: str) -> typing.Tuple:
         _log.debug("command == %r", command)
         command = command + ' '
         _command, _message = command.split(' ', 1)
@@ -40,7 +40,7 @@ class Roller:
         _parsed = (
             int(item)
             if re.fullmatch('\\d+', item)
-            else Roller._action_compiled.fullmatch(item)
+            else cls._action_compiled.fullmatch(item)
             for item in _actions
         )
         return tuple(_parsed) + (_message,)
