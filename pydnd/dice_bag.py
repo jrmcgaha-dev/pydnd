@@ -11,7 +11,7 @@ import typing
 logging.basicConfig(level=logging.DEBUG)
 # Remove above before merge
 _log = logging.getLogger(__name__)
-RANDINT_FUNCTION = typing.Callable[[int, int], int]
+RandIntFunction = typing.Callable[[int, int], int]
 Action = typing.Union[int, str, type(re.match(".*", "type"))]
 Resolution = typing.Union[int, str]
 
@@ -25,7 +25,7 @@ class Roller:
     )
     _action_compiled = re.compile(_action_pattern)
 
-    def __init__(self, randint_function: RANDINT_FUNCTION = random.randint):
+    def __init__(self, randint_function: RandIntFunction = random.randint):
         self._randint = randint_function
 
     @classmethod
