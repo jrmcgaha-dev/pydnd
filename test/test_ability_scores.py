@@ -21,6 +21,8 @@ def test_logger():
 
 
 def test_ability():
+    if debug_enabled:
+        print()
     assert hasattr(ability_scores, '_Ability')
     assert callable(ability_scores._Ability)
     assert hasattr(ability_scores._Ability, '_default_score')
@@ -45,6 +47,8 @@ def test_ability():
 
 
 def test_add_permanent_modifier():
+    if debug_enabled:
+        print()
     sample_ability = ability_scores._Ability()
     assert hasattr(sample_ability, 'add_permanent_modifier')
     sample_ability.add_permanent_modifier({'racial': 2})
