@@ -26,6 +26,10 @@ class _Ability:
         # TODO: Change to score property after creation of method
         return self._base_score + sum(self._mod_permanent.values())
 
+    def __str__(self) -> str:
+        _core = self._base_score + sum(self._mod_permanent.values())
+        return str(_core)
+
     def add_permanent_modifier(self,
                                mods: typing.Dict = None,
                                **kwarg_mods) -> typing.NoReturn:
