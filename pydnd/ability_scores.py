@@ -1,4 +1,10 @@
+import logging
 import typing
+
+
+logging.basicConfig(level=logging.DEBUG)
+# Change above to INFO before merge
+_log = logging.getLogger(__name__)
 
 
 class _Ability:
