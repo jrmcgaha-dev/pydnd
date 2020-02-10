@@ -1,3 +1,4 @@
+from collections import defaultdict
 import logging
 import typing
 
@@ -18,8 +19,8 @@ class _Ability:
         _log.debug("set _base_score = %r", self._base_score)
         self._mod_permanent = dict(**permanent_modifiers)
         _log.debug("set _mod_permanent = %r", self._mod_permanent)
-        self._mod_temporary = dict()
-        self._mod_override = dict()
+        self._mod_temporary = defaultdict(list)
+        self._mod_override = defaultdict(list)
 
     def __call__(self) -> int:
         # TODO: Change to score property after creation of method
