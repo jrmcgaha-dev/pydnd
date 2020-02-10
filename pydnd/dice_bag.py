@@ -130,6 +130,8 @@ class Roller:
         a string input that is similar to the style used by "roll20.net".
         See the Notes section for further examples and details on syntax.
 
+        ...
+
         Parameters
         ----------
         input_: str
