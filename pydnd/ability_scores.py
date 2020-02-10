@@ -16,3 +16,11 @@ class _Ability:
     def __call__(self) -> int:
         # TODO: Change to score property after creation of method
         return self._base_score + sum(self._mod_permanent.values())
+
+    def add_permanent_modifier(self,
+                               mods: typing.Dict = None,
+                               **kwarg_mods) -> typing.NoReturn:
+        if mods is not None:
+            self._mod_permanent.update(mods)
+        if kwarg_mods:
+            self._mod_permanent.update(kwarg_mods)
