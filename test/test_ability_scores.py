@@ -54,6 +54,8 @@ def test_ability_str():
     assert str(sample_ability) == '10'
     sample_ability.add_permanent_modifier(racial=2)
     assert str(sample_ability) == '12'
+    sample_ability.add_temporary_modifier(enhancement=2)
+    assert str(sample_ability) == '12 + 2 (Temp) = 14'
 
 
 def test_ability_score():
