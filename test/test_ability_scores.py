@@ -27,3 +27,14 @@ def test_ability():
     assert 'magic' in ability_with_mods._mod_permanent.keys()
     assert ability_with_mods._mod_permanent.get('racial') == 2
     assert ability_with_mods._mod_permanent.get('magic') == 1
+
+
+def test_add_permanent_modifier():
+    sample_ability = ability_scores._Ability()
+    assert hasattr(sample_ability, 'add_permanent_modifier')
+    sample_ability.add_permanent_modifier({'racial': 2})
+    assert 'racial' in sample_ability._mod_permanent.keys()
+    assert sample_ability() == 12
+    sample_ability.add_permanent_modifier(magic=1)
+    assert 'magic' in sample_ability._mod_permanent.keys()
+    assert sample_ability() == 13
