@@ -17,6 +17,13 @@ Resolution = typing.Union[int, str]
 
 
 class Roller:
+    """
+    Roller class accepts  a random.randint style function upon
+    initialization should the user decide that a specific degree
+    or randomness is required for their dice rolls with the default
+    randint sourced from python's built-in random module. Any provided
+    function should mirror randint's functionality.
+    """
 
     _action_pattern = (
         "(-)?(\\d+)d(\\d+)"
