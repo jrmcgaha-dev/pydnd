@@ -9,6 +9,9 @@ class _Ability:
         if score is None:
             score = self._default_score
         self._base_score = score
+        self._mod_permanent = dict()
+        self._mod_temporary = dict()
+        self._mod_override = dict()
 
     def __call__(self) -> int:
         # TODO: Change to score property after creation of method
