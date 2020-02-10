@@ -26,8 +26,8 @@ class Roller:
 
     _action_pattern = (
         "(-)?(\\d+)d(\\d+)"
-        "(r(?P<once>o)?(?P<reroll>\\d+))?"
-        "((?P<dk>[dk][hl]?)(?P<dk_num>\\d+))?"
+        "(?:r(?P<once>o)?(?P<reroll>\\d+))?"
+        "(?:(?P<dk>[dk][hl]?)(?P<dk_num>\\d+))?"
     )
     _action_compiled = re.compile(_action_pattern)
 
