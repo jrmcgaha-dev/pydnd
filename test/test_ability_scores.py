@@ -1,8 +1,22 @@
+from logging import DEBUG, INFO, WARNING
+
 from pydnd import ability_scores
 
 
+debug_enabled = False
+
+
 def test_imports():
+    assert hasattr(ability_scores, 'logging')
     assert hasattr(ability_scores, 'typing')
+
+
+def test_logger():
+    assert hasattr(ability_scores, '_log')
+    if ability_scores._log.isEnabledFor(DEBUG):
+        debug_enabled = True
+    assert ability_scores._log.isEnabledFor(INFO)
+    assert ability_scores._log.isEnabledFor(WARNING)
 
 
 def test_ability():
