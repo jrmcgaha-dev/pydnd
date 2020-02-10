@@ -20,7 +20,7 @@ class Roller:
     """
     Roller class accepts  a random.randint style function upon
     initialization should the user decide that a specific degree
-    or randomness is required for their dice rolls with the default
+    of randomness is required for their dice rolls with the default
     randint sourced from python's built-in random module. Any provided
     function should mirror randint's functionality.
     """
@@ -32,7 +32,9 @@ class Roller:
     )
     _action_compiled = re.compile(_action_pattern)
 
-    def __init__(self, randint_function: RandIntFunction = random.randint):
+    def __init__(self, randint_function: RandIntFunction = None):
+        if randint_function is None:
+            randint_function = random.randint
         self._randint = randint_function
 
     @classmethod
