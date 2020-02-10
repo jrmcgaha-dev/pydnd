@@ -39,3 +39,13 @@ class _Ability:
         if kwarg_mods:
             self._mod_permanent.update(kwarg_mods)
         _log.debug("After addition: %r", self._mod_permanent)
+
+    def add_temporary_modifier(self,
+                               mods: typing.Dict = None,
+                               **kwarg_mods) -> typing.NoReturn:
+        _log.debug("Before addition: %r", self._mod_temporary)
+        if mods is not None:
+            for _key, _val in mods.items():
+                self._mod_temporary[_key].append(_val)
+        for _key, _val in kwarg_mods.items():
+            self._mod_temporary[_key].append(_val)
