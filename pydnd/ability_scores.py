@@ -20,15 +20,30 @@ class _Ability:
         self._mod_permanent = dict(**permanent_modifiers)
         _log.debug("set _mod_permanent = %r", self._mod_permanent)
         self._mod_temporary = defaultdict(list)
-        self._mod_override = defaultdict(list)
+        self._mod_override = dict()
 
     def __call__(self) -> int:
-        # TODO: Change to score property after creation of method
-        return self._base_score + sum(self._mod_permanent.values())
+        return self.score
 
     def __str__(self) -> str:
         _core = self._base_score + sum(self._mod_permanent.values())
         return str(_core)
+
+    @property
+    def score(self) -> int:
+        _temp_total = 0
+        if any(self._mod_temporary.values()):
+            _temp_total = sum(map(max, self._mod_temporary.values()))
+        _override = -256
+        if any(self._mod_override.values()):
+            _override = max(self._mod_override.values())
+        _base = self._base_score + sum(self._mod_permanent.values())
+        return max(_base+_temp_total, _override)
+
+    @score.setter
+    def score(self, value: int) -> typing.NoReturn:
+        self._base_score = value
+        self._mod_permanent = dict()
 
     def add_permanent_modifier(self,
                                mods: typing.Dict = None,
