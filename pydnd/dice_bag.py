@@ -8,8 +8,6 @@ import re
 import typing
 
 
-logging.basicConfig(level=logging.DEBUG)
-# Remove above before merge
 _log = logging.getLogger(__name__)
 RandIntFunction = typing.Callable[[int, int], int]
 Action = typing.Union[int, str, type(re.match(".*", "type"))]
