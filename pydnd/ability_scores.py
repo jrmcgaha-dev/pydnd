@@ -31,14 +31,8 @@ class _Ability:
 
     @property
     def score(self) -> int:
-        _temp_total = 0
-        if any(self._mod_temporary.values()):
-            _temp_total = sum(map(max, self._mod_temporary.values()))
-        _override = -256
-        if any(self._mod_override.values()):
-            _override = max(self._mod_override.values())
         _base = self._base_score + sum(self._mod_permanent.values())
-        return max(_base+_temp_total, _override)
+        return max(_base+self._temp_total, self._override)
 
     @score.setter
     def score(self, value: int) -> typing.NoReturn:
