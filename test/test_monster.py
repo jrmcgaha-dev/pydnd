@@ -12,4 +12,4 @@ def test_monster():
     assert callable(monster.Monster)
     assert monster.Creature in monster.Monster.__bases__
     sample_monster = monster.Monster()
-    assert hasattr(sample_monster, 'alignmnet')
+    assert hasattr(sample_monster, 'alignment')
