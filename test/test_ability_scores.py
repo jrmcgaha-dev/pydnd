@@ -47,6 +47,15 @@ def test_ability():
     assert ability_with_mods._mod_permanent.get('magic') == 1
 
 
+def test_ability_str():
+    if debug_enabled:
+        print()
+    sample_ability = ability_scores._Ability()
+    assert str(sample_ability) == '10'
+    sample_ability.add_permanent_modifier(racial=2)
+    assert str(sample_ability) == '12'
+
+
 def test_add_permanent_modifier():
     if debug_enabled:
         print()
