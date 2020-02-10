@@ -45,6 +45,18 @@ class _Ability:
         self._base_score = value
         self._mod_permanent = dict()
 
+    @property
+    def _temp_total(self) -> int:
+        if any(self._mod_temporary.values()):
+            return sum(map(max, self._mod_temporary.values()))
+        return 0
+
+    @property
+    def _override(self) -> int:
+        if any(self._mod_override.values()):
+            return max(self._mod_override.values())
+        return -255
+
     def add_permanent_modifier(self,
                                mods: typing.Dict = None,
                                **kwarg_mods) -> typing.NoReturn:
