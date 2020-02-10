@@ -68,6 +68,24 @@ def test_ability_score():
     assert perm_modded_ability._mod_permanent == dict()
 
 
+def test_ability_temp_total():
+    sample_ability = ability_scores._Ability()
+    assert hasattr(sample_ability, '_temp_total')
+    assert sample_ability._temp_total == 0
+    sample_ability.add_temporary_modifier(enhancement=2)
+    assert sample_ability._temp_total == 2
+    sample_ability.add_temporary_modifier(enhancement=4)
+    assert sample_ability._temp_total == 4
+    sample_ability.add_temporary_modifier(luck=2)
+    assert sample_ability._temp_total == 6
+
+
+def test_ability_override():
+    sample_ability = ability_scores._Ability()
+    assert hasattr(sample_ability, '_override')
+    assert sample_ability._override == -255
+
+
 def test_add_permanent_modifier():
     if debug_enabled:
         print()
