@@ -14,6 +14,7 @@ def test_imports():
 def test_logger():
     assert hasattr(ability_scores, '_log')
     if ability_scores._log.isEnabledFor(DEBUG):
+        global debug_enabled
         debug_enabled = True
     assert ability_scores._log.isEnabledFor(INFO)
     assert ability_scores._log.isEnabledFor(WARNING)
