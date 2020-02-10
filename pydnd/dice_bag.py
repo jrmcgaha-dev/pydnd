@@ -123,6 +123,43 @@ class Roller:
         return total
 
     def roll(self, input_: str) -> int:
+        """
+        The roll method handles actually performing a roll based upon
+        a string input that is similar to the style used by "roll20.net".
+        See the Notes section for further examples and details on syntax.
+
+        Parameters
+        ----------
+        input_: str
+            Full dice roll command as a single string
+
+        Returns
+        -------
+        int
+            Value of fully resolved command
+
+        Notes
+        -----
+
+        1d20 : roll one 20 sided die
+        2d20d1 : roll two 20 sided dice dropping the lowest one
+        2d20k1 : roll two 20 sided dice keeping the highest one
+        1d10r2 : roll one 10 sided die re-rolling any value <=2
+        1d10ro2 : roll one 10 sided die re-rolling <=2 only once
+
+        For re-rolling, a value is required
+        2d10r will just roll two 10 sided dice normally
+        2d10r1 will re-roll values of one as expected
+
+        For re-rolling and keeping, order matters
+        2d10d1r2 will fail to parse
+        2d10r2d1 will work as expected (2d10 re-roll <=2 drop lowest 1)
+
+        Operators
+        Addition (+) and subtraction (-) are currently supported while
+        multiplication (*), division (/), and exponentiation (**) are
+        currently not functional.
+        """
         _prep_input = self._parse_command(input_)
         _results = tuple(map(self._resolve_action, _prep_input))
         _total = sum(_results[:-1])
