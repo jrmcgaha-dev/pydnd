@@ -67,3 +67,16 @@ def test_add_permanent_modifier():
     sample_ability.add_permanent_modifier(magic=1)
     assert 'magic' in sample_ability._mod_permanent.keys()
     assert sample_ability() == 13
+
+
+def test_add_temporary_modifier():
+    if debug_enabled:
+        print()
+    sample_ability = ability_scores._Ability()
+    assert hasattr(sample_ability, 'add_temporary_modifier')
+    sample_ability.add_temporary_modifier({'enhancement': 4})
+    assert sample_ability() == 14
+    sample_ability.add_temporary_modifier(enhancement=2)
+    assert sample_ability() == 14
+    sample_ability._mod_temporary.get('enhancement').remove(4)
+    assert sample_ability() == 12
