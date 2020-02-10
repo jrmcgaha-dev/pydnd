@@ -26,8 +26,14 @@ class _Ability:
         return self.score
 
     def __str__(self) -> str:
-        _core = self._base_score + sum(self._mod_permanent.values())
-        return str(_core)
+        _base = self._base_score + sum(self._mod_permanent.values())
+        if self._override > _base:
+            return f"{self._override} (Override)"
+        if self._temp_total:
+            return (f"{_base} "
+                    f"+ {self._temp_total} (Temp) "
+                    f"= {_base+self._temp_total}")
+        return str(_base)
 
     @property
     def score(self) -> int:
