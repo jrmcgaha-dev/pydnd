@@ -56,6 +56,18 @@ def test_ability_str():
     assert str(sample_ability) == '12'
 
 
+def test_ability_score():
+    sample_ability = ability_scores._Ability()
+    assert hasattr(sample_ability, 'score')
+    assert sample_ability.score == 10
+    perm_modded_ability = ability_scores._Ability(racial=2)
+    assert perm_modded_ability.score == 12
+    perm_modded_ability.score = 14
+    assert perm_modded_ability.score == 14
+    assert perm_modded_ability._base_score == 14
+    assert perm_modded_ability._mod_permanent == dict()
+
+
 def test_add_permanent_modifier():
     if debug_enabled:
         print()
