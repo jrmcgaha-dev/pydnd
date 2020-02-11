@@ -27,13 +27,20 @@ class _Ability:
 
     def __str__(self) -> str:
         _base = self._base_score + sum(self._mod_permanent.values())
+        _log.debug("str _base == %r", _base)
+        _modifier_str = ''
+        if self.modifier >= 0:
+            _modifier_str = '+'
+        _modifier_str += str(self.modifier)
+        _log.debug("_modifier_str == %r", _modifier_str)
         if self._override > _base:
-            return f"{self._override} (Override)"
+            return f"{self._override} (Override) ({_modifier_str})"
         if self._temp_total:
             return (f"{_base} "
                     f"+ {self._temp_total} (Temp) "
-                    f"= {_base+self._temp_total}")
-        return str(_base)
+                    f"= {_base+self._temp_total} "
+                    f"({_modifier_str})")
+        return str(_base) + f" ({_modifier_str})"
 
     @property
     def score(self) -> int:
