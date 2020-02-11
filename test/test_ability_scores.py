@@ -137,3 +137,12 @@ def test_ability_add_override():
     assert sample_ability() == 19
     sample_ability.add_override(cloud=29)
     assert sample_ability() == 29
+
+
+def test_ability_details():
+    sample_ability = ability_scores._Ability()
+    expected_details = ("Base\n\t 10\n"
+                        "Permanent Modifiers\n\t\n"
+                        "Temporary Modifiers\n\t\n"
+                        "Overrides\n\t")
+    assert sample_ability.details == expected_details
