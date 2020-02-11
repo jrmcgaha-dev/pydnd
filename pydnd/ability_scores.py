@@ -114,9 +114,25 @@ class _Ability:
             self._mod_temporary[_key].append(_val)
 
     def add_override(self,
-                     mods: typing.Dict = None,
+                     overrides: typing.Dict = None,
                      **kwarg_overrides) -> typing.NoReturn:
-        if mods is not None:
-            self._mod_override.update(mods)
+        """
+        Add overriding modifiers to the score. Overriding modifiers
+        are usually items that set an ability to a score unless if
+        the natural score is higher.
+        
+        Parameters
+        ----------
+        overrides: dict
+            overrides in a dict of form {name: score}
+        kwarg_overrides
+            overrides as keyword args of form name=score
+
+        Returns
+        -------
+
+        """
+        if overrides is not None:
+            self._mod_override.update(overrides)
         if kwarg_overrides:
             self._mod_override.update(**kwarg_overrides)
