@@ -46,6 +46,10 @@ class _Ability:
         self._mod_permanent = dict()
 
     @property
+    def modifier(self) -> int:
+        return self.score//2 - 5
+
+    @property
     def _temp_total(self) -> int:
         if any(self._mod_temporary.values()):
             return sum(map(max, self._mod_temporary.values()))
