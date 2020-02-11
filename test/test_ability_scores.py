@@ -104,7 +104,7 @@ def test_ability_override():
     assert sample_ability._override == -255
 
 
-def test_add_permanent_modifier():
+def test_ability_add_permanent_modifier():
     if debug_enabled:
         print()
     sample_ability = ability_scores._Ability()
@@ -117,7 +117,7 @@ def test_add_permanent_modifier():
     assert sample_ability() == 13
 
 
-def test_add_temporary_modifier():
+def test_ability_add_temporary_modifier():
     if debug_enabled:
         print()
     sample_ability = ability_scores._Ability()
@@ -130,7 +130,7 @@ def test_add_temporary_modifier():
     assert sample_ability() == 12
 
 
-def test_add_override():
+def test_ability_add_override():
     sample_ability = ability_scores._Ability()
     assert hasattr(sample_ability, 'add_override')
     sample_ability.add_override({'ogre strength': 19})
