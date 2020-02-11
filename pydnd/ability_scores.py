@@ -72,7 +72,7 @@ class _Ability:
                                mods: typing.Dict = None,
                                **kwarg_mods) -> typing.NoReturn:
         """
-        Adds permanent modifiers to your score. Permanent modifiers
+        Adds permanent modifiers to the score. Permanent modifiers
         include racial additions, points from leveling, bonuses from
         wishes, and any other modification that is fundamentally a part
         of the ability.
@@ -80,9 +80,9 @@ class _Ability:
         Parameters
         ----------
         mods: dict
-            modifiers in a dictionary of form {mod_name: mod}
+            modifiers in a dict of form {mod_name: mod}
         kwarg_mods
-            modifiers as keyword arguments in form name=mod
+            modifiers as keyword args in form name=mod
         """
         _log.debug("Before addition: %r", self._mod_permanent)
         if mods is not None:
