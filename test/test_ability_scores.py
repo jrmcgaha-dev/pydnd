@@ -128,3 +128,12 @@ def test_add_temporary_modifier():
     assert sample_ability() == 14
     sample_ability._mod_temporary.get('enhancement').remove(4)
     assert sample_ability() == 12
+
+
+def test_add_override():
+    sample_ability = ability_scores._Ability()
+    assert hasattr(sample_ability, 'add_override')
+    sample_ability.add_override({'ogre strength': 19})
+    assert sample_ability() == 19
+    sample_ability.add_override(cloud=29)
+    assert sample_ability() == 29
