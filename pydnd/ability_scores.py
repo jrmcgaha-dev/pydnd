@@ -87,3 +87,11 @@ class _Ability:
                 self._mod_temporary[_key].append(_val)
         for _key, _val in kwarg_mods.items():
             self._mod_temporary[_key].append(_val)
+
+    def add_override(self,
+                     mods: typing.Dict = None,
+                     **kwarg_overrides) -> typing.NoReturn:
+        if mods is not None:
+            self._mod_override.update(mods)
+        if kwarg_overrides:
+            self._mod_override.update(**kwarg_overrides)
