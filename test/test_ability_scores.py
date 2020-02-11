@@ -51,11 +51,11 @@ def test_ability_str():
     if debug_enabled:
         print()
     sample_ability = ability_scores._Ability()
-    assert str(sample_ability) == '10'
+    assert str(sample_ability) == '10 (+0)'
     sample_ability.add_permanent_modifier(racial=2)
-    assert str(sample_ability) == '12'
+    assert str(sample_ability) == '12 (+1)'
     sample_ability.add_temporary_modifier(enhancement=2)
-    assert str(sample_ability) == '12 + 2 (Temp) = 14'
+    assert str(sample_ability) == '12 + 2 (Temp) = 14 (+2)'
 
 
 def test_ability_score():
