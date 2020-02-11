@@ -56,6 +56,8 @@ def test_ability_str():
     assert str(sample_ability) == '12 (+1)'
     sample_ability.add_temporary_modifier(enhancement=2)
     assert str(sample_ability) == '12 + 2 (Temp) = 14 (+2)'
+    neg_ability = ability_scores._Ability(8)
+    assert str(neg_ability) == '8 (-1)'
 
 
 def test_ability_score():
