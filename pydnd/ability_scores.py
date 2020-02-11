@@ -94,6 +94,18 @@ class _Ability:
     def add_temporary_modifier(self,
                                mods: typing.Dict = None,
                                **kwarg_mods) -> typing.NoReturn:
+        """
+        Adds temporary modifiers to the score. Temporary modifiers
+        include buffs, curses, and any other effect that affects the
+        score but is not fundamentally a part of the ability.
+
+        Parameters
+        ----------
+        mods: dict
+            modifiers in a dict of form {modifier_type: mod}
+        kwarg_mods
+            modifiers as keyword args of form type=mod
+        """
         _log.debug("Before addition: %r", self._mod_temporary)
         if mods is not None:
             for _key, _val in mods.items():
