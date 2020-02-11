@@ -70,6 +70,20 @@ def test_ability_score():
     assert perm_modded_ability._mod_permanent == dict()
 
 
+def test_ability_modifier():
+    sample_ability = ability_scores._Ability()
+    assert hasattr(sample_ability, 'modifier')
+    assert sample_ability.modifier == 0
+    sample_ability.score = 8
+    assert sample_ability.modifier == -1
+    sample_ability.score = 12
+    assert sample_ability.modifier == 1
+    sample_ability.score = 1
+    assert sample_ability.modifier == -5
+    sample_ability.score = 15
+    assert sample_ability.modifier == 2
+
+
 def test_ability_temp_total():
     sample_ability = ability_scores._Ability()
     assert hasattr(sample_ability, '_temp_total')
