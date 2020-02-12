@@ -147,3 +147,17 @@ def test_ability_details():
 
 def test_ability_scores_class():
     assert hasattr(ability_scores, 'AbilityScores')
+    assert hasattr(ability_scores, '_roller')
+    sample_ability_scores = ability_scores.AbilityScores()
+    assert hasattr(ability_scores, '_array')
+    assert isinstance(ability_scores._array, dict)
+    def_scores = 'str', 'dex', 'con', 'int', 'wis', 'cha'
+    assert all(val in sample_ability_scores._array.keys() for val in def_scores)
+    for val in sample_ability_scores._array.values():
+        assert isinstance(val, ability_scores._Ability)
+        assert val() == (10, 0)
+    extended_scores = ability_scores.AbilityScores(sanity=12)
+    assert 'sanity' in extended_scores._array.keys()
+    sanity_value = extended_scores._array.get('sanity')
+    assert isinstance(sanity_value, ability_scores._Ability)
+    assert sanity_value() == (12, 1)
