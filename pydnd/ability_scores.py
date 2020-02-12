@@ -121,6 +121,7 @@ class AbilityScores:
 
     def __init__(self, **scores):
         _input = {name: 10 for name in self._def_scores}
+        scores = {key.strip('_'): val for key, val in scores.items()}
         _input.update(scores)
         self._array = {name: _Ability(value) for name, value in _input.items()}
         _log.info("Loaded %s as ability scores", ', '.join(self._array.keys()))
