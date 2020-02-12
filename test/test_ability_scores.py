@@ -117,28 +117,6 @@ def test_ability_add_permanent_modifier():
     assert sample_ability() == 13
 
 
-def test_ability_add_temporary_modifier():
-    if debug_enabled:
-        print()
-    sample_ability = ability_scores._Ability()
-    assert hasattr(sample_ability, 'add_temporary_modifier')
-    sample_ability.add_temporary_modifier({'enhancement': 4})
-    assert sample_ability() == 14
-    sample_ability.add_temporary_modifier(enhancement=2)
-    assert sample_ability() == 14
-    sample_ability._mod_temporary.get('enhancement').remove(4)
-    assert sample_ability() == 12
-
-
-def test_ability_add_override():
-    sample_ability = ability_scores._Ability()
-    assert hasattr(sample_ability, 'add_override')
-    sample_ability.add_override({'ogre strength': 19})
-    assert sample_ability() == 19
-    sample_ability.add_override(cloud=29)
-    assert sample_ability() == 29
-
-
 def test_ability_details():
     sample_ability = ability_scores._Ability()
     expected_details = ("Base\n\t 10\n"
