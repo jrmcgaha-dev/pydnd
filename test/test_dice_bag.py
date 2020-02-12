@@ -60,6 +60,8 @@ def test_roller_parse_command():
     _experiment = dice_bag.Roller._parse_command(dice_test)
     assert dice_result.groups() == _experiment[0].groups()
     assert dice_bag.Roller._parse_command('1d12-1d10')[1]
+    expected = ('-2', 'PlusMinus')
+    assert dice_bag.Roller._parse_command('+-2 PlusMinus') == expected
 
 
 def test_resolve_action():
