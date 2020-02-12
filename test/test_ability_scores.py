@@ -39,7 +39,7 @@ def test_ability():
     assert sample_ability._mod_temporary == dict()
     assert sample_ability._mod_override == dict()
     ability_with_mods = ability_scores._Ability(12, racial=2, magic=1)
-    assert ability_with_mods() == 15
+    assert ability_with_mods() == (15, 2)
     assert ability_with_mods._base_score == 12
     assert 'racial' in ability_with_mods._mod_permanent.keys()
     assert 'magic' in ability_with_mods._mod_permanent.keys()
