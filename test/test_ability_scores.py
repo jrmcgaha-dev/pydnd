@@ -142,4 +142,4 @@ def test_ability_details():
         temporary='enhancement [2]',
         override='ogre 19'
     )
-    sample_ability.details == expected
+    assert sample_ability.details == expected
