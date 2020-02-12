@@ -112,4 +112,5 @@ class _Ability:
 
 
 class AbilityScores:
-    pass
+
+    def __init__(self):
