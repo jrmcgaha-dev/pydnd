@@ -151,6 +151,7 @@ def test_ability_scores_class():
     assert hasattr(ability_scores, 'AbilityScores')
     assert hasattr(ability_scores.AbilityScores, '_roller')
     assert hasattr(ability_scores.AbilityScores, '_def_scores')
+    assert hasattr(ability_scores.AbilityScores, 'standard_array')
     sample_ability_scores = ability_scores.AbilityScores()
     assert hasattr(sample_ability_scores, '_array')
     assert isinstance(sample_ability_scores._array, dict)
