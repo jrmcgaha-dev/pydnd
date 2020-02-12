@@ -140,6 +140,6 @@ def test_ability_details():
         base=10,
         permanent='racial 2',
         temporary='enhancement [2]',
-        override='ogre 19'
+        overrides='ogre 19'
     )
     assert sample_ability.details == expected
