@@ -137,3 +137,7 @@ class AbilityScores:
     def __str__(self):
         return '\n'.join(f"{key}: {val}" for key, val in self._array.items())
 
+    def roll(self, ability: str, method: str = '1d20') -> int:
+        _ability = self._array.get(ability, _Ability())
+        return self._roller.roll(f"{method}{_ability.modifier:+}")
+
