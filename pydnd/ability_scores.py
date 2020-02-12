@@ -30,8 +30,8 @@ class _Ability:
         self._mod_temporary = defaultdict(list)
         self._mod_override = dict()
 
-    def __call__(self) -> int:
-        return self.score
+    def __call__(self) -> typing.Tuple[int, int]:
+        return self.score, self.modifier
 
     def __str__(self) -> str:
         _base = self._base_score + sum(self._mod_permanent.values())
