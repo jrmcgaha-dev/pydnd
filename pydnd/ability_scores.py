@@ -109,3 +109,7 @@ class _Ability:
             temporary=_temp,
             overrides=_over,
         )
+
+
+class AbilityScores:
+    pass
