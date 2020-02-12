@@ -176,5 +176,5 @@ def test_ability_scores_roll_array():
     assert len(strange_array) == 6
     assert all(3 <= val <= 18 for val in strange_array)
     extended_array = ability_scores.AbilityScores.roll_array(number=8)
-    assert len(strange_array) == 8
+    assert len(extended_array) == 8
     assert all(3 <= val <= 18 for val in extended_array)
