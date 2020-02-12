@@ -124,9 +124,12 @@ def test_ability_add_permanent_modifier():
 
 
 def test_ability_details():
+    assert hasattr(ability_scores._Ability, '_details_formatter')
     sample_ability = ability_scores._Ability()
-    expected_details = ("Base\n\t 10\n"
-                        "Permanent Modifiers\n\t\n"
-                        "Temporary Modifiers\n\t\n"
-                        "Overrides\n\t")
-    assert sample_ability.details == expected_details
+    expected = ability_scores._Ability._details_formatter.format(
+        base=10,
+        permanent=' ',
+        temporary=' ',
+        overrides=' ',
+    )
+    assert sample_ability.details == expected
