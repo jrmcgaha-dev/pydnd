@@ -36,11 +36,6 @@ class _Ability:
     def __str__(self) -> str:
         _base = self._base_score + sum(self._mod_permanent.values())
         _log.debug("str _base == %r", _base)
-        _modifier_str = ''
-        if self.modifier >= 0:
-            _modifier_str = '+'
-        _modifier_str += str(self.modifier)
-        _log.debug("_modifier_str == %r", _modifier_str)
         if self._override > _base:
             return f"{self._override} (Override) ({self.modifier:+})"
         if self._temp_total:
