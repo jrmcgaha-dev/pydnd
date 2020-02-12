@@ -143,3 +143,7 @@ def test_ability_details():
         overrides='ogre 19'
     )
     assert sample_ability.details == expected
+
+
+def test_ability_scores():
+    assert hasattr(ability_scores, 'AbilityScores')
