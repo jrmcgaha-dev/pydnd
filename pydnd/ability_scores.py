@@ -37,10 +37,10 @@ class _Ability:
         _base = self._base_score + sum(self._mod_permanent.values())
         _log.debug("str _base == %r", _base)
         if self._override > _base:
-            return f"{self._override} (Override) ({self.modifier:+})"
+            return f"{self._override}<Override> ({self.modifier:+})"
         if self._temp_total:
             return (f"{_base}"
-                    f"{self._temp_total:+} (Temp) "
+                    f"{self._temp_total:+}<Temp>"
                     f"= {_base+self._temp_total} "
                     f"({self.modifier:+})")
         return f"{_base} ({self.modifier:+})"
