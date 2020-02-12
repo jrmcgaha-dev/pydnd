@@ -116,7 +116,7 @@ class _Ability:
 class AbilityScores:
 
     _def_scores = 'str', 'dex', 'con', 'int', 'wis', 'cha'
-    _roller = None
+    _roller = Roller()
 
     def __init__(self, **scores):
         _input = {name: 10 for name in self._def_scores}
