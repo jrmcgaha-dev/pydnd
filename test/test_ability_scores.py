@@ -31,7 +31,7 @@ def test_ability():
     sample_ability = ability_scores._Ability()
     assert hasattr(sample_ability, '_base_score')
     assert sample_ability._base_score == ability_scores._Ability._default_score
-    assert sample_ability() == 10
+    assert sample_ability() == (10, 0)
     assert hasattr(sample_ability, '_mod_permanent')
     assert hasattr(sample_ability, '_mod_temporary')
     assert hasattr(sample_ability, '_mod_override')
@@ -117,10 +117,10 @@ def test_ability_add_permanent_modifier():
     assert hasattr(sample_ability, 'add_permanent_modifier')
     sample_ability.add_permanent_modifier({'racial': 2})
     assert 'racial' in sample_ability._mod_permanent.keys()
-    assert sample_ability() == 12
+    assert sample_ability() == (12, 1)
     sample_ability.add_permanent_modifier(magic=1)
     assert 'magic' in sample_ability._mod_permanent.keys()
-    assert sample_ability() == 13
+    assert sample_ability() == (13, 1)
 
 
 def test_ability_details():
