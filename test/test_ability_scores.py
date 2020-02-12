@@ -179,3 +179,15 @@ def test_ability_scores_roll_array():
     extended_array = ability_scores.AbilityScores.roll_array(number=8)
     assert len(extended_array) == 8
     assert all(3 <= val <= 18 for val in extended_array)
+
+
+def test_ability_scores_str():
+    sample_array = ability_scores.AbilityScores()
+    assert hasattr(sample_array, '__str__')
+    expected = ("str: 10 (+0)\n"
+                "dex: 10 (+0)\n"
+                "con: 10 (+0)\n"
+                "int: 10 (+0)\n"
+                "wis: 10 (+0)\n"
+                "cha: 10 (+0)")
+    assert str(sample_array) == expected
