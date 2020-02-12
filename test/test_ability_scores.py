@@ -163,3 +163,17 @@ def test_ability_scores_class():
     sanity_value = extended_scores._array.get('sanity')
     assert isinstance(sanity_value, ability_scores._Ability)
     assert sanity_value() == (12, 1)
+
+
+def test_ability_scores_roll_array():
+    assert hasattr(ability_scores.AbilityScores, 'roll_array')
+    sample_array = ability_scores.AbilityScores.roll_array()
+    assert isinstance(sample_array, list)
+    assert len(sample_array) == 6
+    assert all(3 <= val <= 18 for val in sample_array)
+    strange_array = ability_scores.AbilityScores.roll_array('10d6k3')
+    assert len(strange_array) == 6
+    assert all(3 <= val <= 18 for val in strange_array)
+    extended_array = ability_scores.AbilityScores.roll_array(number=8)
+    assert len(strange_array) == 8
+    assert all(3 <= val <= 18 for val in extended_array)
