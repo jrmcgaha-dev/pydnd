@@ -11,6 +11,7 @@ def test_imports():
     assert hasattr(ability_scores, 'logging')
     assert hasattr(ability_scores, 'typing')
     assert hasattr(ability_scores, 'Roller')
+    assert hasattr(ability_scores, '_roll_log')
 
 
 def test_logger():
