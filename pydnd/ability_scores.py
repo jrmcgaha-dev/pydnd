@@ -2,6 +2,8 @@ from collections import defaultdict
 import logging
 import typing
 
+from pydnd.dice_bag import Roller
+
 
 logging.basicConfig(level=logging.DEBUG)
 # Change above to INFO before merge
