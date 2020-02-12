@@ -117,6 +117,7 @@ class AbilityScores:
 
     _def_scores = 'str', 'dex', 'con', 'int', 'wis', 'cha'
     _roller = Roller()
+    standard_array = (15, 14, 13, 12, 10, 8)
 
     def __init__(self, **scores):
         _input = {name: 10 for name in self._def_scores}
