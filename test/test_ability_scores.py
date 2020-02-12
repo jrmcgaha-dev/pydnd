@@ -88,11 +88,11 @@ def test_ability_temp_total():
     sample_ability = ability_scores._Ability()
     assert hasattr(sample_ability, '_temp_total')
     assert sample_ability._temp_total == 0
-    sample_ability.add_temporary_modifier(enhancement=2)
+    sample_ability._mod_temporary['enhancement'].append(2)
     assert sample_ability._temp_total == 2
-    sample_ability.add_temporary_modifier(enhancement=4)
+    sample_ability._mod_temporary['enhancement'].append(4)
     assert sample_ability._temp_total == 4
-    sample_ability.add_temporary_modifier(luck=2)
+    sample_ability._mod_temporary['luck'].append(2)
     assert sample_ability._temp_total == 6
 
 
