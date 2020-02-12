@@ -42,13 +42,13 @@ class _Ability:
         _modifier_str += str(self.modifier)
         _log.debug("_modifier_str == %r", _modifier_str)
         if self._override > _base:
-            return f"{self._override} (Override) ({_modifier_str})"
+            return f"{self._override} (Override) ({self.modifier:+})"
         if self._temp_total:
-            return (f"{_base} "
-                    f"+ {self._temp_total} (Temp) "
+            return (f"{_base}"
+                    f"{self._temp_total:+} (Temp) "
                     f"= {_base+self._temp_total} "
-                    f"({_modifier_str})")
-        return str(_base) + f" ({_modifier_str})"
+                    f"({self.modifier:+})")
+        return f"{_base} ({self.modifier:+})"
 
     @property
     def score(self) -> int:
