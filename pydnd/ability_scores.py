@@ -127,8 +127,9 @@ class AbilityScores:
 
     @classmethod
     def roll_array(cls, method: str = '4d6d1', number: int = 6):
+        tmp_log_level = _roll_log.getEffectiveLevel()
         _roll_log.setLevel(logging.WARNING)
         tmp = [cls._roller.roll(method) for _ in range(number)]
-        _roll_log.setLevel(logging.INFO)
+        _roll_log.setLevel(tmp_log_level)
         return tmp
 
