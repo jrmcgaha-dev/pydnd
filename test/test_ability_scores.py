@@ -54,6 +54,10 @@ def test_ability_str():
     assert str(sample_ability) == '10 (+0)'
     sample_ability.add_permanent_modifier(racial=2)
     assert str(sample_ability) == '12 (+1)'
+    sample_ability._mod_temporary['enhancement'].append(2)
+    assert str(sample_ability) == '12+2 (Temp) = 14 (+2)'
+    sample_ability._mod_override['ogre'] = 19
+    assert str(sample_ability) == '19 (Override) (+4)'
     neg_ability = ability_scores._Ability(8)
     assert str(neg_ability) == '8 (-1)'
 
