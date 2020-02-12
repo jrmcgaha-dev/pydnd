@@ -113,4 +113,12 @@ class _Ability:
 
 class AbilityScores:
 
-    def __init__(self):
+    _def_scores = 'str', 'dex', 'con', 'int', 'wis', 'cha'
+    _roller = None
+
+    def __init__(self, **scores):
+        _input = {name: 10 for name in self._def_scores}
+        _input.update(scores)
+        self._array = {name: _Ability(value) for name, value in _input.items()}
+        _log.info("Loaded %s as ability scores", ', '.join(self._array.keys()))
+
