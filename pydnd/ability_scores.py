@@ -93,3 +93,19 @@ class _Ability:
         if kwarg_mods:
             self._mod_permanent.update(kwarg_mods)
         _log.debug("After addition: %r", self._mod_permanent)
+
+    @property
+    def details(self):
+
+        def tuple_convert(item: typing.Tuple):
+            return "{} {}".format(*item)
+
+        _perm_snip = '\n'.join(map(tuple_convert, self._mod_permanent.items()))
+        _temp_snip = '\n'.join(map(tuple_convert, self._mod_temporary.items()))
+        _over_snip = '\n'.join(map(tuple_convert, self._mod_override.items()))
+        return self._details_formatter.format(
+            base=self._base_score,
+            permanent=_perm_snip,
+            temporary=_temp_snip,
+            overrides=_over_snip,
+        )
