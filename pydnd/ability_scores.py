@@ -133,3 +133,6 @@ class AbilityScores:
         _roll_log.setLevel(tmp_log_level)
         return tmp
 
+    def __str__(self):
+        return '\n'.join(f"{key}: {val}" for key, val in self._array.items())
+
