@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG)
 _log = logging.getLogger(__name__)
 
 
-class _Ability:
+class Ability:
 
     _default_score = 10
     _details_formatter = ("Base\n"
@@ -123,7 +123,7 @@ class AbilityScores:
         _input = {name: 10 for name in self._def_scores}
         scores = {key.strip('_'): val for key, val in scores.items()}
         _input.update(scores)
-        self._array = {name: _Ability(value) for name, value in _input.items()}
+        self._array = {name: Ability(value) for name, value in _input.items()}
         _log.info("Loaded %s as ability scores", ', '.join(self._array.keys()))
 
     @classmethod
@@ -138,6 +138,6 @@ class AbilityScores:
         return '\n'.join(f"{key}: {val}" for key, val in self._array.items())
 
     def roll(self, ability: str, method: str = '1d20') -> int:
-        _ability = self._array.get(ability, _Ability())
+        _ability = self._array.get(ability, Ability())
         return self._roller.roll(f"{method}{_ability.modifier:+}")
 
