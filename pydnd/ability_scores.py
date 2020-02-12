@@ -2,7 +2,7 @@ from collections import defaultdict
 import logging
 import typing
 
-from pydnd.dice_bag import Roller
+from pydnd.dice_bag import Roller, _log as _roll_log
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -123,4 +123,11 @@ class AbilityScores:
         _input.update(scores)
         self._array = {name: _Ability(value) for name, value in _input.items()}
         _log.info("Loaded %s as ability scores", ', '.join(self._array.keys()))
+
+    @classmethod
+    def roll_array(cls, method: str = '4d6d1', number: int = 6):
+        _roll_log.setLevel(logging.WARNING)
+        tmp = [cls._roller.roll(method) for _ in range(number)]
+        _roll_log.setLevel(logging.INFO)
+        return tmp
 
