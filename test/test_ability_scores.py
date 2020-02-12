@@ -145,5 +145,5 @@ def test_ability_details():
     assert sample_ability.details == expected
 
 
-def test_ability_scores():
+def test_ability_scores_class():
     assert hasattr(ability_scores, 'AbilityScores')
