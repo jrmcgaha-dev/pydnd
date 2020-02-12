@@ -100,6 +100,10 @@ def test_ability_override():
     sample_ability = ability_scores._Ability()
     assert hasattr(sample_ability, '_override')
     assert sample_ability._override == -255
+    sample_ability._mod_override['ogre'] = 19
+    assert sample_ability._override == 19
+    sample_ability._mod_override['cloud'] = 29
+    assert sample_ability._override == 29
 
 
 def test_ability_add_permanent_modifier():
