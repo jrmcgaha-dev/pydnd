@@ -125,7 +125,7 @@ def test_ability_add_permanent_modifier():
 
 def test_ability_details():
     assert hasattr(ability_scores._Ability, '_details_formatter')
-    assert hasattr(ability_scores._Ability, '_str_tuple_two')
+    assert hasattr(ability_scores._Ability, '_str_tup')
     sample_ability = ability_scores._Ability()
     expected = ability_scores._Ability._details_formatter.format(
         base=10,
