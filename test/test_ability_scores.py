@@ -128,9 +128,9 @@ def test_ability_details():
     sample_ability = ability_scores._Ability()
     expected = ability_scores._Ability._details_formatter.format(
         base=10,
-        permanent=' ',
-        temporary=' ',
-        overrides=' ',
+        permanent='',
+        temporary='',
+        overrides='',
     )
     assert sample_ability.details == expected
     sample_ability.add_permanent_modifier(racial=2)
