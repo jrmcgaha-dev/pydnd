@@ -133,3 +133,13 @@ def test_ability_details():
         overrides=' ',
     )
     assert sample_ability.details == expected
+    sample_ability.add_permanent_modifier(racial=2)
+    sample_ability._mod_temporary['enhancement'].append(2)
+    sample_ability._mod_override['ogre'] = 19
+    expected = ability_scores._Ability._details_formatter.format(
+        base=10,
+        permanent='racial 2',
+        temporary='enhancement [2]',
+        override='ogre 19'
+    )
+    sample_ability.details == expected
