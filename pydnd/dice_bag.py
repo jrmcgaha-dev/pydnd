@@ -43,13 +43,13 @@ class Roller:
         _command, _message = command.split(' ', 1)
         _log.debug("_command == %r", _command)
         _log.debug("_message == %r", _message)
-        _command = _command[0] + str.replace(_command[1:], '-', '+-')
+        _command = re.sub("(?<=\\d)-(?=\\d)", "+-", _command).strip('+')
         _log.debug("- to +-: _command == %r", _command)
         _actions = _command.split('+')
         _log.debug("_actions == %r", _actions)
         _parsed = (
             int(item)
-            if re.fullmatch('\\d+', item)
+            if re.fullmatch('-?\\d+', item)
             else cls._action_compiled.fullmatch(item)
             for item in _actions
         )
