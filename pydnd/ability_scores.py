@@ -11,6 +11,14 @@ _log = logging.getLogger(__name__)
 class _Ability:
 
     _default_score = 10
+    _details_formatter = ("Base\n"
+                          "\t{base}\n"
+                          "Permanent\n"
+                          "\t{permanent}\n"
+                          "Temporary\n"
+                          "\t{temporary}\n"
+                          "Overrides\n"
+                          "\t{overrides}")
 
     def __init__(self, score: int = None, **permanent_modifiers):
         if score is None:
