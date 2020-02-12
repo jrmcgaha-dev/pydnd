@@ -191,3 +191,12 @@ def test_ability_scores_str():
                 "wis: 10 (+0)\n"
                 "cha: 10 (+0)")
     assert str(sample_array) == expected
+
+
+def test_ability_scores_roll():
+    sample_array = ability_scores.AbilityScores(str=15)
+    assert hasattr(sample_array, 'roll')
+    assert 1 <= sample_array.roll('int') <= 20
+    assert 3 <= sample_array.roll('str') <= 20
+    assert 1 <= sample_array.roll('int', '1d2') <= 2
+    assert 3 <= sample_array.roll('str', '1d2') <= 4
