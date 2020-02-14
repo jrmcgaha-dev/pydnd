@@ -42,3 +42,15 @@ def test_monster_experience():
     assert sample_monster.experience == 155000+3100
     sample_monster.challenge_rating = 31.5
     assert sample_monster.experience == 155000+3100+1600
+
+
+def test_monster_proficiency():
+    sample_monster = monster.Monster()
+    assert hasattr(sample_monster, 'proficiency')
+    assert sample_monster.proficiency == 2
+    sample_monster.challenge_rating = 7
+    assert sample_monster.proficiency == 3
+    sample_monster.challenge_rating = 28
+    assert sample_monster.proficiency == 8
+    sample_monster.challenge_rating = 32.5
+    assert sample_monster.proficiency == 9
