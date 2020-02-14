@@ -8,7 +8,7 @@ from pydnd.dice_bag import Roller
 
 
 class Monster(Creature):
-    _challenge_to_experience = json.load(
+    _challenge_to_experience: typing.Dict[str, int] = json.load(
         resource_stream(
             "pydnd",
             "cr_to_xp.json"
@@ -16,5 +16,18 @@ class Monster(Creature):
     )
 
     def __init__(self):
-        self.challenge_rating: int = 0
+        self.challenge_rating: float = 0
         super().__init__()
+
+    @property
+    def experience(self):
+        _int_part = int(self.challenge_rating)
+        _dec_part = self.challenge_rating - _int_part
+        _low = self._challenge_to_experience.get(str(min(_int_part, 30)), 0)
+        if _int_part >= 30:
+            _low += sum(val*100 for val in range(31, _int_part+1))
+            _estimate = (_int_part+1) * 100
+        else:
+            _estimate = self._challenge_to_experience.get(str(_int_part+1), 0)
+            _estimate -= _low
+        return _low + round(_dec_part*_estimate)
