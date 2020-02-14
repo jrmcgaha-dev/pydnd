@@ -2,6 +2,8 @@ import logging
 import re
 import typing
 
+from pydnd.ability_scores import AbilityScores
+
 
 logging.basicConfig(level=logging.INFO)
 _log: logging.Logger = logging.getLogger(__name__)
@@ -44,8 +46,7 @@ class Creature:
         self.armor_class: int = Creature._base_ac
         self.hitpoints: int = 0
         self.speed: int = 0
-        self.attributes: typing.Any = None
-        # Attributes will eventually have custom handler class
+        self.attributes: AbilityScores = AbilityScores()
         self.saving_throws: typing.List[str] = list()
         self.skills: typing.List[str] = list()
         self.damage_resistances: typing.List[str] = list()
