@@ -14,9 +14,16 @@ class Monster(Creature):
             "cr_to_xp.json"
         )
     )
+    _size_mult_to_hp = {
+        0.5: 2.5,
+        2: 5.5,
+        4: 6.5,
+        8: 10.5
+    }
 
     def __init__(self):
         self.challenge_rating: float = 0
+        self.hit_dice_number: int = 1
         super().__init__()
 
     @property
@@ -35,3 +42,17 @@ class Monster(Creature):
     @property
     def proficiency(self) -> int:
         return max((self.challenge_rating-1, 0))//4 + 2
+
+    @property
+    def avg_hp(self) -> int:
+        if self.size_multiplier == 1:
+            _die_val = 4.5
+            if 'small' in self.size.lower():
+                _die_val -= 1
+        elif self.size_multiplier > 8:
+            _die_val = 10.5
+        else:
+            _die_val = self._size_mult_to_hp.get(self.size_multiplier)
+        _dice_hp = int(_die_val*self.hit_dice_number)
+        _con_hp = self.hit_dice_number * self.attributes['con'].modifier
+        return _dice_hp + _con_hp
