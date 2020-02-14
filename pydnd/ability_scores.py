@@ -144,3 +144,13 @@ class AbilityScores:
     def __getitem__(self, item: str) -> Ability:
         return self._array.get(item, Ability())
 
+    def __setitem__(self, key: str, value: typing.Any) -> typing.NoReturn:
+        if isinstance(value, Ability):
+            self._array[key] = value
+        elif isinstance(value, int):
+            self._array[key] = Ability(value)
+        elif isinstance(value, dict):
+            self._array[key] = Ability(**value)
+        else:
+            _log.warning("Input %r failed to parse. Ignoring input.", value)
+
