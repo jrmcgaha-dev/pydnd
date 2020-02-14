@@ -5,6 +5,7 @@ def test_imports():
     assert hasattr(monster, 'json')
     assert hasattr(monster, 'resource_stream')
     assert hasattr(monster, 'typing')
+    assert hasattr(monster, 'Ability')
     assert hasattr(monster, 'AbilityScores')
     assert hasattr(monster, 'Creature')
     assert hasattr(monster, 'Roller')
