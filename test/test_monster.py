@@ -3,6 +3,7 @@ from pydnd import monster
 
 def test_imports():
     assert hasattr(monster, 'typing')
+    assert hasattr(monster, 'AbilityScores')
     assert hasattr(monster, 'Creature')
     assert hasattr(monster, 'Roller')
 
