@@ -20,7 +20,7 @@ class Monster(Creature):
         super().__init__()
 
     @property
-    def experience(self):
+    def experience(self) -> int:
         _int_part = int(self.challenge_rating)
         _dec_part = self.challenge_rating - _int_part
         _low = self._challenge_to_experience.get(str(min(_int_part, 30)), 0)
@@ -33,5 +33,5 @@ class Monster(Creature):
         return _low + round(_dec_part*_estimate)
 
     @property
-    def proficiency(self):
+    def proficiency(self) -> int:
         return max((self.challenge_rating-1, 0))//4 + 2
