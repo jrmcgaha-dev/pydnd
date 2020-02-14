@@ -18,3 +18,11 @@ def test_monster():
     sample_monster = monster.Monster()
     assert hasattr(sample_monster, 'alignment')
     assert hasattr(sample_monster, 'challenge_rating')
+
+
+def test_monster_challenge_to_experience():
+    assert isinstance(monster.Monster._challenge_to_experience, dict)
+    cr2xp = monster.Monster._challenge_to_experience
+    table_keys = map(str, map(float, (1/8, 1/4, 1/2, *range(31))))
+    assert all(key in cr2xp.keys() for key in table_keys)
+    assert all(isinstance(value, int) for value in cr2xp.values())
