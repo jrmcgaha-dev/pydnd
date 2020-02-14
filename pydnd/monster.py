@@ -6,4 +6,7 @@ from pydnd.dice_bag import Roller
 
 
 class Monster(Creature):
-    pass
+
+    def __init__(self):
+        self.challenge_rating: int = 0
+        super().__init__()
