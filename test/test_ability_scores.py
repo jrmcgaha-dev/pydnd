@@ -200,3 +200,16 @@ def test_ability_scores_roll():
     assert 3 <= sample_array.roll('str') <= 22
     assert 1 <= sample_array.roll('int', '1d2') <= 2
     assert 3 <= sample_array.roll('str', '1d2') <= 4
+
+
+def test_ability_score_get_set():
+    sample_array = ability_scores.AbilityScores()
+    assert hasattr(sample_array, '__getitem__')
+    assert hasattr(sample_array, '__setitem__')
+    assert isinstance(sample_array['str'], ability_scores.Ability)
+    sample_array['str'] = ability_scores.Ability(12)
+    assert sample_array['str'].score == 12
+    sample_array['str'] = 14
+    assert sample_array['str'].score == 14
+    sample_array['str'] = {'score': 14, 'racial': 2}
+    assert sample_array['str'].score == 16
