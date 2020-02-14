@@ -38,3 +38,7 @@ def test_monster_experience():
     assert sample_monster.experience == 1800
     sample_monster.challenge_rating = 5.5
     assert sample_monster.experience == 2050
+    sample_monster.challenge_rating = 31
+    assert sample_monster.experience == 155000+3100
+    sample_monster.challenge_rating = 31.5
+    assert sample_monster.experience == 155000+3100+1600
