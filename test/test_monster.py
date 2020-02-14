@@ -68,3 +68,7 @@ def test_monster_avg_hp():
     assert sample_monster.avg_hp == 11
     sample_monster.size = 'huge'
     assert sample_monster.avg_hp == 15
+    sample_monster.size = 'gargantuan'
+    assert sample_monster.avg_hp == 23
+    sample_monster.size = 'gargantuan++'
+    assert sample_monster.avg_hp == 23
