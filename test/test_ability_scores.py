@@ -213,3 +213,5 @@ def test_ability_score_get_set():
     assert sample_array['str'].score == 14
     sample_array['str'] = {'score': 14, 'racial': 2}
     assert sample_array['str'].score == 16
+    sample_array['str'] = 'Invalid'
+    assert sample_array['str'].score == 16
