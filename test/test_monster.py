@@ -18,6 +18,7 @@ def test_monster():
     sample_monster = monster.Monster()
     assert hasattr(sample_monster, 'alignment')
     assert hasattr(sample_monster, 'challenge_rating')
+    assert hasattr(sample_monster, 'hit_dice_number')
 
 
 def test_monster_challenge_to_experience():
@@ -54,3 +55,15 @@ def test_monster_proficiency():
     assert sample_monster.proficiency == 8
     sample_monster.challenge_rating = 32.5
     assert sample_monster.proficiency == 9
+
+
+def test_monster_avg_hp():
+    sample_monster = monster.Monster()
+    assert hasattr(sample_monster, 'avg_hp')
+    assert sample_monster.avg_hp == 4
+    sample_monster.hit_dice_number = 2
+    assert sample_monster.avg_hp == 9
+    sample_monster.attributes = monster.AbilityScores(con=12)
+    assert sample_monster.avg_hp == 11
+    sample_monster.size = 'huge'
+    assert sample_monster.avg_hp == 15
