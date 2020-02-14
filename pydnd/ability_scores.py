@@ -141,3 +141,6 @@ class AbilityScores:
         _ability = self._array.get(ability, Ability())
         return self._roller.roll(f"{method}{_ability.modifier:+}")
 
+    def __getitem__(self, item: str) -> Ability:
+        return self._array.get(item, Ability())
+
