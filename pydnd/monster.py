@@ -31,3 +31,7 @@ class Monster(Creature):
             _estimate = self._challenge_to_experience.get(str(_int_part+1), 0)
             _estimate -= _low
         return _low + round(_dec_part*_estimate)
+
+    @property
+    def proficiency(self):
+        return max((self.challenge_rating-1, 0))//4 + 2
