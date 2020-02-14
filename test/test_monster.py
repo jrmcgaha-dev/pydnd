@@ -14,3 +14,4 @@ def test_monster():
     assert monster.Creature in monster.Monster.__bases__
     sample_monster = monster.Monster()
     assert hasattr(sample_monster, 'alignment')
+    assert hasattr(sample_monster, 'challenge_rating')
