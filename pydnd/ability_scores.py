@@ -38,6 +38,14 @@ class Ability:
             Various permanent modifiers to the score. These should be provided
             as keyword arguments in the style of type=value
             (ex. racial=2)
+
+        Notes
+        -----
+        The Ability class natively handles the base score and permanent
+        modifiers only. Properties for calculating temporary modifiers and
+        override scores are provided to allow functionality with other
+        methods/classes better designed to handle managing the existence of
+        those modifiers.
         """
         if score is None:
             score = self._default_score
