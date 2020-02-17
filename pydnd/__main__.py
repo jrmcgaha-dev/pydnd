@@ -12,7 +12,6 @@ roller = dice_bag.Roller()
 
 
 def main(*_args, print_help=False):
-    pass
     parser = argparse.ArgumentParser(prog="pydnd", description="Roll some dice")
     parser.add_argument('pos_rolls', nargs='*', type=str)
     parser.add_argument('-r', '--roll', nargs='*', type=str)
