@@ -1,3 +1,6 @@
+"""ability_scores manages individual ability scores using the Ability class
+and ability score arrays using the AbilityScores class
+"""
 from collections import defaultdict
 import logging
 import typing
@@ -5,8 +8,7 @@ import typing
 from pydnd.dice_bag import Roller, _log as _roll_log
 
 
-logging.basicConfig(level=logging.DEBUG)
-# Change above to INFO before merge
+logging.basicConfig(level=logging.INFO)
 _log = logging.getLogger(__name__)
 
 
