@@ -11,14 +11,14 @@ _log = logging.getLogger('pydnd')
 roller = dice_bag.Roller()
 
 
-def main(*_args, print_help=False):
+def main(*_args):
     parser = argparse.ArgumentParser(prog="pydnd", description="Roll some dice")
     parser.add_argument('pos_rolls', nargs='*', type=str)
     parser.add_argument('-r', '--roll', nargs='*', type=str)
     parser.add_argument('-m', '--message', type=str, default='')
-    if print_help:
+    if len(sys.argv) <= 1 and not _args:
         parser.print_help()
-        return None
+        exit()
     if _args:
         args = parser.parse_args(_args)
     else:
@@ -34,8 +34,5 @@ def main(*_args, print_help=False):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) <= 1:
-        main(print_help=True)
-        exit()
     main()
     exit()
