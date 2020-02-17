@@ -8,4 +8,9 @@ setup(
     package_data={
         'pydnd': ['cr_to_xp.json']
     },
+    entry_points={
+        'console_scripts': [
+            'pydnd = pydnd._main:main'
+        ]
+    }
 )
