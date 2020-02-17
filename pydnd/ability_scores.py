@@ -13,6 +13,8 @@ _log = logging.getLogger(__name__)
 
 
 class Ability:
+    """Ability manages individual scores
+    """
 
     _default_score = 10
     _details_formatter = ("Base\n"
@@ -25,6 +27,18 @@ class Ability:
                           "\t{overrides}")
 
     def __init__(self, score: int = None, **permanent_modifiers):
+        """Score and permanent modifiers may be declared on initialization or
+        set later
+
+        Parameters
+        ----------
+        score : int, optional
+            The base value for the score before any modifiers (default: 10)
+        permanent_modifiers : Dict[str, int], optional
+            Various permanent modifiers to the score. These should be provided
+            as keyword arguments in the style of type=value
+            (ex. racial=2)
+        """
         if score is None:
             score = self._default_score
         self._base_score = score
