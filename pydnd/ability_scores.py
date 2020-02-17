@@ -183,12 +183,43 @@ class Ability:
 
 
 class AbilityScores:
+    """AbilityScores manages a full array of scores both default and custom
+
+    Getting and setting of individual abilities is similar to dictionary
+    element access with additional handling in place to enforce that only
+    Ability instances exist within an AbilityScores instance.
+
+    Examples
+    --------
+    >>> AbilityScores()['str']
+    Ability class for strength
+
+    >>> AbilityScores()['str'] = 15
+    Sets strength ability to the result of Ability(15)
+
+    >>> AbilityScores()['str'] = Ability(15, racial=2)
+    Sets strength to newly created Ability object
+
+    >>> AbilityScores()['str'] = {'score': 15, 'racial': 2}
+    Sets strength to Ability(score=15, racial=2)
+
+    """
 
     _def_scores = 'str', 'dex', 'con', 'int', 'wis', 'cha'
     _roller = Roller()
     standard_array = (15, 14, 13, 12, 10, 8)
 
     def __init__(self, **scores):
+        """AbilityScores allows for flexible declaration of abilities
+
+        Parameters
+        ----------
+        scores : Dict[str, int], optional
+            Score names and values provided as keyword arguments
+            Scores default to the normal 5e array of
+            str, dex, con, int, wis, cha
+            All, some, or none of these may be provided on initialization
+        """
         _input = {name: 10 for name in self._def_scores}
         scores = {key.strip('_'): val for key, val in scores.items()}
         _input.update(scores)
@@ -197,6 +228,23 @@ class AbilityScores:
 
     @classmethod
     def roll_array(cls, method: str = '4d6d1', number: int = 6):
+        """Generates an n numbered array of values for abilities
+
+        Parameters
+        ----------
+        method : str, optional
+            Defines the method by which a score is rolled
+            Defaults to 4d6d1 (the 5e rolling default)
+        number : int, optional
+            Defines the number of abilities to roll
+            Defaults to 6 (the number of regular 5e abilities)
+
+        Returns
+        -------
+        List[int]
+            list containing "number" integer ability scores
+
+        """
         tmp_log_level = _roll_log.getEffectiveLevel()
         _roll_log.setLevel(logging.WARNING)
         tmp = [cls._roller.roll(method) for _ in range(number)]
@@ -204,9 +252,32 @@ class AbilityScores:
         return tmp
 
     def __str__(self):
+        """Creates pretty string of AbilityScores
+
+        Returns
+        -------
+        str
+            Created in form "ability: value, ability: value, ..."
+
+        """
         return '\n'.join(f"{key}: {val}" for key, val in self._array.items())
 
     def roll(self, ability: str, method: str = '1d20') -> int:
+        """Rolls using the modifier of the selected ability
+
+        Parameters
+        ----------
+        ability : str
+            Name of the desired ability as stored in class instance
+        method : str, optional
+            Roll to which modifier should be added (default: 1d20)
+
+        Returns
+        -------
+        int
+            Value of roll
+
+        """
         _ability = self._array.get(ability, Ability())
         return self._roller.roll(f"{method}{_ability.modifier:+}")
 
