@@ -1,3 +1,7 @@
+"""creature houses the Creature class that acts as the bedrock for all other
+entity classes
+
+"""
 import logging
 import re
 import typing
@@ -12,6 +16,11 @@ _log.debug("Change logging level to INFO before develop merge")
 
 
 class Creature:
+    """Creature is a generalized class for handling any given entity in
+    Dungeons and Dragons 5th edition. All other classes for more specific
+    entities are derived from this class.
+
+    """
 
     _base_ac: int = 10
     _alignment_hash: typing.Dict[str, int] = {
@@ -39,6 +48,28 @@ class Creature:
     }
 
     def __init__(self):
+        """Creature initialization creates an empty creature ready for
+        various attributes to be loaded.
+
+        Manual Entry
+        ------------
+        name : str
+        size : str
+            corresponds to any size on the chart with additional pluses
+            indicating growth
+            (ex. tiny, small+ == medium, large++ == two steps above large)
+        type : str
+        armor_class : int
+        hitpoints : int
+        speed : int
+        saving_throws : List[str]
+        skills : List[str]
+        damage_resistances : List[str]
+        damage_vulnerabilities : List[str]
+        damage_immunities : List[str]
+        senses : List[str]
+
+        """
         self.name: str = ''
         self.size: str = ''
         self.type: str = ''
@@ -62,10 +93,22 @@ class Creature:
         law/chaos good/evil order (i.e. lawful good or lg would
         work but good lawful would not)
 
+        Parameters
+        ----------
+        str
+            Target alignment for setting
+
         Returns
         -------
         str
             Formatted string representing alignment
+
+        Examples
+        --------
+        >>> Creature().alignment
+        Unaligned
+        >>> tmp = Creature(); tmp.alignment = 'lawful good'; tmp.alignment
+        Lawful Good
 
         """
         _log.debug('Entering alignment getter')
@@ -116,6 +159,14 @@ class Creature:
 
     @property
     def size_multiplier(self) -> int:
+        """Property to evaluate value to multiply size dependent values
+
+        Returns
+        -------
+        int
+            Value by which size dependent values should be multiplied
+
+        """
         _log.debug("Entering size_multiplier")
         if not self.size:
             return 1
@@ -136,6 +187,14 @@ class Creature:
 
     @property
     def languages(self):
+        """Property to show creature's known languages
+
+        Returns
+        -------
+        str
+            Of form "language_1, language_2, ..."
+
+        """
         if not self._lang_list:
             _log.debug("bool(_lang_list) == False")
             return ''
@@ -143,6 +202,19 @@ class Creature:
         return ', '.join(map(str.title, self._lang_list))
 
     def add_language(self, lang: str) -> str:
+        """Adds language given to languages known
+
+        Parameters
+        ----------
+        lang : str
+            Language to be added
+
+        Returns
+        -------
+        str
+            Result of languages property
+
+        """
         par = lang.lower().strip(' ')
         _log.debug("set par = %r", par)
         self._lang_list.append(par)
@@ -150,6 +222,19 @@ class Creature:
         return self.languages
 
     def remove_language(self, lang: str) -> str:
+        """Safely removes language from languages known
+
+        Parameters
+        ----------
+        lang : str
+            Language to be removed
+
+        Returns
+        -------
+        str
+            Result of languages property
+
+        """
         par = lang.lower().strip(' ')
         _log.debug("set par = %r", par)
         if par in self._lang_list:
@@ -158,4 +243,7 @@ class Creature:
         return self.languages
 
     def clear_languages(self) -> typing.NoReturn:
+        """Removes all languages known
+
+        """
         self._lang_list.clear()
