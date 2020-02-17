@@ -1,3 +1,6 @@
+"""ability_scores manages individual ability scores using the Ability class
+and ability score arrays using the AbilityScores class
+"""
 from collections import defaultdict
 import logging
 import typing
@@ -5,12 +8,13 @@ import typing
 from pydnd.dice_bag import Roller, _log as _roll_log
 
 
-logging.basicConfig(level=logging.DEBUG)
-# Change above to INFO before merge
+logging.basicConfig(level=logging.INFO)
 _log = logging.getLogger(__name__)
 
 
 class Ability:
+    """Ability manages individual scores
+    """
 
     _default_score = 10
     _details_formatter = ("Base\n"
@@ -23,6 +27,26 @@ class Ability:
                           "\t{overrides}")
 
     def __init__(self, score: int = None, **permanent_modifiers):
+        """Score and permanent modifiers may be declared on initialization or
+        set later
+
+        Parameters
+        ----------
+        score : int, optional
+            The base value for the score before any modifiers (default: 10)
+        permanent_modifiers : Dict[str, int], optional
+            Various permanent modifiers to the score. These should be provided
+            as keyword arguments in the style of type=value
+            (ex. racial=2)
+
+        Notes
+        -----
+        The Ability class natively handles the base score and permanent
+        modifiers only. Properties for calculating temporary modifiers and
+        override scores are provided to allow functionality with other
+        methods/classes better designed to handle managing the existence of
+        those modifiers.
+        """
         if score is None:
             score = self._default_score
         self._base_score = score
@@ -33,9 +57,24 @@ class Ability:
         self._mod_override = dict()
 
     def __call__(self) -> typing.Tuple[int, int]:
+        """Provides easy access to score and modifier properties
+
+        Returns
+        -------
+        Tuple[int, int]
+            Provided in form of (score, modifier)
+
+        """
         return self.score, self.modifier
 
     def __str__(self) -> str:
+        """Produces a prettified string representation of the ability
+
+        Returns
+        -------
+        str
+            Provided in form "base[+temporary= total]|override (modifier)"
+        """
         _base = self._base_score + sum(self._mod_permanent.values())
         _log.debug("str _base == %r", _base)
         if self._override > _base:
@@ -49,6 +88,19 @@ class Ability:
 
     @property
     def score(self) -> int:
+        """Accesses score property getter and setter
+
+        Parameters
+        ----------
+        value : int
+            Sets base score to value and clears permanent modifiers
+
+        Returns
+        -------
+        int
+            Value of score plus any modifiers or override
+
+        """
         _base = self._base_score + sum(self._mod_permanent.values())
         return max(_base+self._temp_total, self._override)
 
@@ -59,6 +111,14 @@ class Ability:
 
     @property
     def modifier(self) -> int:
+        """Access modifier property getter
+
+        Returns
+        -------
+        int
+            Value of modifier based upon value of score property
+
+        """
         return self.score//2 - 5
 
     @property
@@ -98,6 +158,15 @@ class Ability:
 
     @property
     def details(self):
+        """Creates a string detailing all modifiers and overrides of the current
+        Ability instance
+
+        Returns
+        -------
+        str
+            Formatted for printing all information affecting current Ability
+
+        """
 
         def tuple_convert(item: typing.Tuple):
             return "{} {}".format(*item)
@@ -114,12 +183,43 @@ class Ability:
 
 
 class AbilityScores:
+    """AbilityScores manages a full array of scores both default and custom
+
+    Getting and setting of individual abilities is similar to dictionary
+    element access with additional handling in place to enforce that only
+    Ability instances exist within an AbilityScores instance.
+
+    Examples
+    --------
+    >>> AbilityScores()['str']
+    Ability class for strength
+
+    >>> AbilityScores()['str'] = 15
+    Sets strength ability to the result of Ability(15)
+
+    >>> AbilityScores()['str'] = Ability(15, racial=2)
+    Sets strength to newly created Ability object
+
+    >>> AbilityScores()['str'] = {'score': 15, 'racial': 2}
+    Sets strength to Ability(score=15, racial=2)
+
+    """
 
     _def_scores = 'str', 'dex', 'con', 'int', 'wis', 'cha'
     _roller = Roller()
     standard_array = (15, 14, 13, 12, 10, 8)
 
     def __init__(self, **scores):
+        """AbilityScores allows for flexible declaration of abilities
+
+        Parameters
+        ----------
+        scores : Dict[str, int], optional
+            Score names and values provided as keyword arguments
+            Scores default to the normal 5e array of
+            str, dex, con, int, wis, cha
+            All, some, or none of these may be provided on initialization
+        """
         _input = {name: 10 for name in self._def_scores}
         scores = {key.strip('_'): val for key, val in scores.items()}
         _input.update(scores)
@@ -128,6 +228,23 @@ class AbilityScores:
 
     @classmethod
     def roll_array(cls, method: str = '4d6d1', number: int = 6):
+        """Generates an n numbered array of values for abilities
+
+        Parameters
+        ----------
+        method : str, optional
+            Defines the method by which a score is rolled
+            Defaults to 4d6d1 (the 5e rolling default)
+        number : int, optional
+            Defines the number of abilities to roll
+            Defaults to 6 (the number of regular 5e abilities)
+
+        Returns
+        -------
+        List[int]
+            list containing "number" integer ability scores
+
+        """
         tmp_log_level = _roll_log.getEffectiveLevel()
         _roll_log.setLevel(logging.WARNING)
         tmp = [cls._roller.roll(method) for _ in range(number)]
@@ -135,9 +252,32 @@ class AbilityScores:
         return tmp
 
     def __str__(self):
+        """Creates pretty string of AbilityScores
+
+        Returns
+        -------
+        str
+            Created in form "ability: value, ability: value, ..."
+
+        """
         return '\n'.join(f"{key}: {val}" for key, val in self._array.items())
 
     def roll(self, ability: str, method: str = '1d20') -> int:
+        """Rolls using the modifier of the selected ability
+
+        Parameters
+        ----------
+        ability : str
+            Name of the desired ability as stored in class instance
+        method : str, optional
+            Roll to which modifier should be added (default: 1d20)
+
+        Returns
+        -------
+        int
+            Value of roll
+
+        """
         _ability = self._array.get(ability, Ability())
         return self._roller.roll(f"{method}{_ability.modifier:+}")
 
