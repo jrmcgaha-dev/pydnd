@@ -10,15 +10,20 @@ logging.basicConfig(level=logging.DEBUG)
 _log = logging.getLogger('pydnd')
 roller = dice_bag.Roller()
 
-if __name__ == '__main__':
+
+def main(*_args, print_help=False):
+    pass
     parser = argparse.ArgumentParser()
     parser.add_argument('pos_rolls', nargs='*', type=str)
     parser.add_argument('-r', '--roll', nargs='*', type=str)
     parser.add_argument('-m', '--message', type=str, default='')
-    if len(sys.argv) <= 1:
+    if print_help:
         parser.print_help()
-        exit()
-    args = parser.parse_args()
+        return None
+    if _args:
+        args = parser.parse_args(_args)
+    else:
+        args = parser.parse_args()
     if args.roll is None:
         args.roll = list()
     for _item in args.pos_rolls:
@@ -27,4 +32,10 @@ if __name__ == '__main__':
         roller.roll(_item)
     if args.message:
         _log.info("message: %s", args.message)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) <= 1:
+        main(print_help=True)
+        exit()
     exit()
