@@ -1,4 +1,4 @@
-# pydnd v0.1
+# pydnd v0.1.1
 Flexible Dungeons and Dragons entity manager and helper
 # Installation
 pydnd is structured to be installed via pip. It requires python 3.8 or later,
