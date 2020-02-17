@@ -49,9 +49,24 @@ class Ability:
         self._mod_override = dict()
 
     def __call__(self) -> typing.Tuple[int, int]:
+        """Provides easy access to score and modifier properties
+
+        Returns
+        -------
+        Tuple[int, int]
+            Provided in form of (score, modifier)
+
+        """
         return self.score, self.modifier
 
     def __str__(self) -> str:
+        """Produces a prettified string representation of the ability
+
+        Returns
+        -------
+        str
+            Provided in form "base[+temporary= total]|override (modifier)"
+        """
         _base = self._base_score + sum(self._mod_permanent.values())
         _log.debug("str _base == %r", _base)
         if self._override > _base:
@@ -65,6 +80,19 @@ class Ability:
 
     @property
     def score(self) -> int:
+        """Accesses score property getter and setter
+
+        Parameters
+        ----------
+        value : int
+            Sets base score to value and clears permanent modifiers
+
+        Returns
+        -------
+        int
+            Value of score plus any modifiers or override
+
+        """
         _base = self._base_score + sum(self._mod_permanent.values())
         return max(_base+self._temp_total, self._override)
 
@@ -75,6 +103,14 @@ class Ability:
 
     @property
     def modifier(self) -> int:
+        """Access modifier property getter
+
+        Returns
+        -------
+        int
+            Value of modifier based upon value of score property
+
+        """
         return self.score//2 - 5
 
     @property
@@ -114,6 +150,15 @@ class Ability:
 
     @property
     def details(self):
+        """Creates a string detailing all modifiers and overrides of the current
+        Ability instance
+
+        Returns
+        -------
+        str
+            Formatted for printing all information affecting current Ability
+
+        """
 
         def tuple_convert(item: typing.Tuple):
             return "{} {}".format(*item)
