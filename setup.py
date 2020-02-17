@@ -2,7 +2,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='pydnd',
-    version='0.1',
+    version='0.1.1',
     packages=find_namespace_packages(),
     python_requires='>=3.8',
     package_data={
