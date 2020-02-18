@@ -7,6 +7,7 @@ import re
 import typing
 
 from pydnd.ability_scores import AbilityScores
+from pydnd.exceptions import ParseError
 
 
 _log = logging.getLogger(__name__)
@@ -145,7 +146,7 @@ class Creature:
                 self._alignment = (_order, _morality)
                 _log.debug('set self._alignment = %r', self._alignment)
             else:
-                _log.warning('Invalid data. Ignoring %r', value)
+                raise ParseError(value)
         _log.debug('Exiting alignment setter')
 
     @property
