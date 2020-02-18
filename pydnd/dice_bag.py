@@ -6,6 +6,8 @@ import random
 import re
 import typing
 
+from pydnd.exceptions import RollerError
+
 
 _log = logging.getLogger(__name__)
 RandIntFunction = typing.Callable[[int, int], int]
