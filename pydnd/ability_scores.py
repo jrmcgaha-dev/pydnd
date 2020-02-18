@@ -224,7 +224,7 @@ class AbilityScores:
         scores = {key.strip('_'): val for key, val in scores.items()}
         _input.update(scores)
         self._array = {name: Ability(value) for name, value in _input.items()}
-        _log.info("Loaded %s as ability scores", ', '.join(self._array.keys()))
+        _log.debug("Loaded %s as ability scores", ', '.join(self._array.keys()))
 
     @classmethod
     def roll_array(cls, method: str = '4d6d1', number: int = 6):
