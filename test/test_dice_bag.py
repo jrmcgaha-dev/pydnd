@@ -53,6 +53,14 @@ def test_roller_init():
     except exceptions.RollerError:
         assert True
 
+    def float_randint(a, b):
+        return (a+b)/2
+
+    try:
+        sample_roller = dice_bag.Roller(float_randint)
+    except exceptions.RollerError:
+        assert True
+
 
 def test_roller_roll():
     if debug_enabled:
