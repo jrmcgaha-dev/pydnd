@@ -92,7 +92,11 @@ def test_size_multipliter():
     empty_creature.size = 'Medium+'
     assert empty_creature.size_multiplier == pow(2, 1)
     empty_creature.size = 'Invalid'
-    assert empty_creature.size_multiplier == pow(2, 0)
+    try:
+        assert empty_creature.size_multiplier == pow(2, 0)
+    except exceptions.ParseError:
+        empty_creature.size = ''
+        assert empty_creature.size_multiplier == pow(2, 0)
 
 
 def test_languages_interaction():
