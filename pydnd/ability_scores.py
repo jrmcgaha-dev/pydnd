@@ -245,9 +245,13 @@ class AbilityScores:
 
         """
         tmp_log_level = _roll_log.getEffectiveLevel()
-        _roll_log.setLevel(logging.WARNING)
+        _changed_log = False
+        if tmp_log_level < logging.WARNING:
+            _roll_log.setLevel(logging.WARNING)
+            _changed_log = True
         tmp = [cls._roller.roll(method) for _ in range(number)]
-        _roll_log.setLevel(tmp_log_level)
+        if _changed_log:
+            _roll_log.setLevel(tmp_log_level)
         return tmp
 
     def __str__(self):
