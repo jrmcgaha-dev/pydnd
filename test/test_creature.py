@@ -1,4 +1,5 @@
 from pydnd import creature
+from pydnd import exceptions
 
 
 def test_imports():
@@ -46,7 +47,10 @@ def test_alignment_set_get():
     assert empty_creature.alignment == 'Lawful Good'
     empty_creature.alignment = 'Chaotic Evil'
     assert empty_creature.alignment == 'Chaotic Evil'
-    empty_creature.alignment = 'invalid'
+    try:
+        empty_creature.alignment = 'invalid'
+    except exceptions.ParseError:
+        pass
     assert empty_creature.alignment == 'Chaotic Evil'
     empty_creature.alignment = 'Good'
     assert empty_creature.alignment == 'Neutral Good'
