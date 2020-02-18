@@ -101,6 +101,11 @@ class Creature:
         str
             Formatted string representing alignment
 
+        Raises
+        ------
+        ParseError
+            Improper value given on attempted set
+
         Examples
         --------
         >>> Creature().alignment
@@ -163,6 +168,11 @@ class Creature:
         -------
         int
             Value by which size dependent values should be multiplied
+
+        Raises
+        ------
+        ParseError
+            Size has been set to an invalid value
 
         """
         _log.debug("Entering size_multiplier")
