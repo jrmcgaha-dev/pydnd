@@ -32,3 +32,5 @@ def test_monster():
     goblin.add_language('Common')
     goblin.add_language('Goblin')
     assert goblin.languages == 'Common, Goblin'
+    goblin.alignment = 'ne'
+    assert goblin.alignment == 'Neutral Evil'
