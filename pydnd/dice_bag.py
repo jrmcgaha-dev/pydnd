@@ -6,7 +6,7 @@ import random
 import re
 import typing
 
-from pydnd.exceptions import RollerError
+from pydnd import exceptions
 
 
 _log = logging.getLogger(__name__)
@@ -43,6 +43,9 @@ class Roller:
         """
         if randint_function is None:
             randint_function = random.randint
+        check = _stress_randint(randint_function)
+        if check:
+            raise exceptions.RollerError(f"{check} function provided")
         self._randint = randint_function
 
     @classmethod
@@ -180,3 +183,18 @@ class Roller:
         else:
             _log.info("Total: %s", _total)
         return _total
+
+
+def _stress_randint(_func: typing.Callable, depth: int = 100) -> str:
+    try:
+        tmp = _func(1, 20)
+    except TypeError:
+        return 'Broken'
+    if isinstance(tmp, float):
+        return 'Broken'
+    for _ in range(depth):
+        old_tmp = tmp
+        tmp = _func(1, 20)
+        if not old_tmp == tmp:
+            return ''
+    return 'Suspicious'
