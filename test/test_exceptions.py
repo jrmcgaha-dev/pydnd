@@ -1,18 +1,18 @@
 from pydnd import exceptions
 
 
-def test_root_exception():
-    assert hasattr(exceptions, 'PydndException')
-    assert Exception in exceptions.PydndException.__bases__
+def test_root_error():
+    assert hasattr(exceptions, 'PydndError')
+    assert Exception in exceptions.PydndError.__bases__
     try:
-        raise exceptions.PydndException
-    except exceptions.PydndException:
+        raise exceptions.PydndError
+    except exceptions.PydndError:
         assert True
 
 
 def test_parsing_exception():
     assert hasattr(exceptions, 'ParseError')
-    assert exceptions.PydndException in exceptions.ParseError.__bases__
+    assert exceptions.PydndError in exceptions.ParseError.__bases__
     try:
         raise exceptions.ParseError
     except exceptions.ParseError:
