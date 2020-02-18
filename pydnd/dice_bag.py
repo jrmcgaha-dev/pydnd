@@ -190,7 +190,7 @@ def _stress_randint(_func: typing.Callable, depth: int = 100) -> str:
         tmp = _func(1, 20)
     except TypeError:
         return 'Broken'
-    if isinstance(tmp, float):
+    if not isinstance(tmp, int):
         return 'Broken'
     for _ in range(depth):
         old_tmp = tmp
