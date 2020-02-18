@@ -61,6 +61,14 @@ def test_roller_init():
     except exceptions.RollerError:
         assert True
 
+    def overflow_randint(a, b):
+        return b+1
+
+    try:
+        sample_roller = dice_bag.Roller(overflow_randint)
+    except exceptions.RollerError:
+        assert True
+
 
 def test_roller_roll():
     if debug_enabled:
