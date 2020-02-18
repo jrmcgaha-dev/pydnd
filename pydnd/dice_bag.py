@@ -6,8 +6,9 @@ import random
 import re
 import typing
 
+from pydnd import exceptions
 
-logging.basicConfig(level=logging.INFO)
+
 _log = logging.getLogger(__name__)
 RandIntFunction = typing.Callable[[int, int], int]
 Action = typing.Union[int, str, type(re.match(".*", "type"))]
@@ -39,9 +40,17 @@ class Roller:
         randint_function : Callable[[int, int], int]
             Function that acts similar to random.randint
             Defaults to random.randint
+
+        Raises
+        ------
+        RollerError
+            Raised on detection of broken or suspicious randint_function
         """
         if randint_function is None:
             randint_function = random.randint
+        check = _stress_randint(randint_function)
+        if check:
+            raise exceptions.RollerError(f"{check} function provided")
         self._randint = randint_function
 
     @classmethod
@@ -125,7 +134,7 @@ class Roller:
         total = sum(results)
         if action.group(1):
             total *= -1
-        _log.info(" %s : %s => %s",
+        _log.info("%s : %s => %s",
                   action.group(0),
                   pretty_results,
                   total)
@@ -175,7 +184,27 @@ class Roller:
         _results = tuple(map(self._resolve_action, _prep_input))
         _total = sum(_results[:-1])
         if _results[-1]:
-            _log.info(" Total: %s Message: %s", _total, _results[-1])
+            _log.info("Total: %s Message: %s", _total, _results[-1])
         else:
-            _log.info(" Total: %s", _total)
+            _log.info("Total: %s", _total)
         return _total
+
+
+def _stress_randint(_func: typing.Callable, depth: int = 10) -> str:
+    try:
+        tmp = _func(1, 200)
+    except TypeError:
+        return 'Broken'
+    if not isinstance(tmp, int):
+        return 'Broken'
+    repeat_check = True
+    for _ in range(depth):
+        old_tmp = tmp
+        tmp = _func(1, 200)
+        if tmp > 200 or tmp < 1:
+            return 'Broken'
+        if not old_tmp == tmp:
+            repeat_check = False
+    if repeat_check:
+        return 'Suspicious'
+    return ''

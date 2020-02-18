@@ -1,4 +1,5 @@
 from pydnd import creature
+from pydnd import exceptions
 
 
 def test_imports():
@@ -46,7 +47,10 @@ def test_alignment_set_get():
     assert empty_creature.alignment == 'Lawful Good'
     empty_creature.alignment = 'Chaotic Evil'
     assert empty_creature.alignment == 'Chaotic Evil'
-    empty_creature.alignment = 'invalid'
+    try:
+        empty_creature.alignment = 'invalid'
+    except exceptions.ParseError:
+        pass
     assert empty_creature.alignment == 'Chaotic Evil'
     empty_creature.alignment = 'Good'
     assert empty_creature.alignment == 'Neutral Good'
@@ -88,7 +92,11 @@ def test_size_multipliter():
     empty_creature.size = 'Medium+'
     assert empty_creature.size_multiplier == pow(2, 1)
     empty_creature.size = 'Invalid'
-    assert empty_creature.size_multiplier == pow(2, 0)
+    try:
+        assert empty_creature.size_multiplier == pow(2, 0)
+    except exceptions.ParseError:
+        empty_creature.size = ''
+        assert empty_creature.size_multiplier == pow(2, 0)
 
 
 def test_languages_interaction():

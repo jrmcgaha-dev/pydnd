@@ -1,4 +1,4 @@
-from pydnd import _main
+from pydnd import scripts
 
 if __name__ == '__main__':
-    _main.main()
+    scripts.main()

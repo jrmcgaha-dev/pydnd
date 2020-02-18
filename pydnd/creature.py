@@ -7,12 +7,10 @@ import re
 import typing
 
 from pydnd.ability_scores import AbilityScores
+from pydnd.exceptions import ParseError
 
 
-logging.basicConfig(level=logging.INFO)
-_log: logging.Logger = logging.getLogger(__name__)
-_log.debug("Establish that logger is active")
-_log.debug("Change logging level to INFO before develop merge")
+_log = logging.getLogger(__name__)
 
 
 class Creature:
@@ -103,6 +101,11 @@ class Creature:
         str
             Formatted string representing alignment
 
+        Raises
+        ------
+        ParseError
+            Improper value given on attempted set
+
         Examples
         --------
         >>> Creature().alignment
@@ -148,7 +151,7 @@ class Creature:
                 self._alignment = (_order, _morality)
                 _log.debug('set self._alignment = %r', self._alignment)
             else:
-                _log.warning('Invalid data. Ignoring %r', value)
+                raise ParseError(value)
         _log.debug('Exiting alignment setter')
 
     @property
@@ -166,6 +169,11 @@ class Creature:
         int
             Value by which size dependent values should be multiplied
 
+        Raises
+        ------
+        ParseError
+            Size has been set to an invalid value
+
         """
         _log.debug("Entering size_multiplier")
         if not self.size:
@@ -177,8 +185,7 @@ class Creature:
         _log.debug("Pattern used: %r", _pattern)
         par = re.match(_pattern, par)
         if par is None or not par.group(0):
-            _log.warning("Unable to parse size %r. Defaulting to 1", self.size)
-            return 1
+            raise ParseError(str(self.size))
         _log.debug("Group 0: %r", par.group(0))
         _log.debug("Group 1: %r", par.group(1))
         _log.debug("Group 2: %r", par.group(2))

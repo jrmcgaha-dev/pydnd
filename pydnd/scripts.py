@@ -5,9 +5,7 @@ import sys
 from pydnd import dice_bag
 
 
-logging.basicConfig(level=logging.DEBUG)
-# Change above to INFO before merge
-_log = logging.getLogger('pydnd')
+_log = logging.getLogger(__name__)
 roller = dice_bag.Roller()
 
 
@@ -31,8 +29,3 @@ def main(*_args):
         roller.roll(_item)
     if args.message:
         _log.info("message: %s", args.message)
-
-
-if __name__ == '__main__':
-    main()
-    exit()

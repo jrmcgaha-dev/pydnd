@@ -6,9 +6,9 @@ import logging
 import typing
 
 from pydnd.dice_bag import Roller, _log as _roll_log
+from pydnd.exceptions import AbilityError
 
 
-logging.basicConfig(level=logging.INFO)
 _log = logging.getLogger(__name__)
 
 
@@ -189,6 +189,11 @@ class AbilityScores:
     element access with additional handling in place to enforce that only
     Ability instances exist within an AbilityScores instance.
 
+    Raises
+    ------
+    AbilityError
+        setitem value is neither Ability nor able to be converted to Ability
+
     Examples
     --------
     >>> AbilityScores()['str']
@@ -224,7 +229,7 @@ class AbilityScores:
         scores = {key.strip('_'): val for key, val in scores.items()}
         _input.update(scores)
         self._array = {name: Ability(value) for name, value in _input.items()}
-        _log.info("Loaded %s as ability scores", ', '.join(self._array.keys()))
+        _log.debug("Loaded %s as ability scores", ', '.join(self._array.keys()))
 
     @classmethod
     def roll_array(cls, method: str = '4d6d1', number: int = 6):
@@ -246,9 +251,13 @@ class AbilityScores:
 
         """
         tmp_log_level = _roll_log.getEffectiveLevel()
-        _roll_log.setLevel(logging.WARNING)
+        _changed_log = False
+        if tmp_log_level < logging.WARNING:
+            _roll_log.setLevel(logging.WARNING)
+            _changed_log = True
         tmp = [cls._roller.roll(method) for _ in range(number)]
-        _roll_log.setLevel(tmp_log_level)
+        if _changed_log:
+            _roll_log.setLevel(tmp_log_level)
         return tmp
 
     def __str__(self):
@@ -292,5 +301,5 @@ class AbilityScores:
         elif isinstance(value, dict):
             self._array[key] = Ability(**value)
         else:
-            _log.warning("Input %r failed to parse. Ignoring input.", value)
+            raise AbilityError(str(value))
 

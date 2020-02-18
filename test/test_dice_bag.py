@@ -1,4 +1,5 @@
 from pydnd import dice_bag
+from pydnd import exceptions
 
 debug_enabled = True
 
@@ -35,6 +36,38 @@ def test_roller_init():
     sample_roller = dice_bag.Roller()
     assert hasattr(sample_roller, '_randint')
     assert dice_bag.random.randint == sample_roller._randint
+
+    def bad_randint(a):
+        return a
+
+    try:
+        sample_roller = dice_bag.Roller(bad_randint)
+    except exceptions.RollerError:
+        assert True
+
+    def cheat_randint(a, b):
+        return b
+
+    try:
+        sample_roller = dice_bag.Roller(cheat_randint)
+    except exceptions.RollerError:
+        assert True
+
+    def float_randint(a, b):
+        return (a+b)/2
+
+    try:
+        sample_roller = dice_bag.Roller(float_randint)
+    except exceptions.RollerError:
+        assert True
+
+    def overflow_randint(a, b):
+        return b+1
+
+    try:
+        sample_roller = dice_bag.Roller(overflow_randint)
+    except exceptions.RollerError:
+        assert True
 
 
 def test_roller_roll():
