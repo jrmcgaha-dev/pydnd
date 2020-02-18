@@ -175,8 +175,7 @@ class Creature:
         _log.debug("Pattern used: %r", _pattern)
         par = re.match(_pattern, par)
         if par is None or not par.group(0):
-            _log.warning("Unable to parse size %r. Defaulting to 1", self.size)
-            return 1
+            raise ParseError(str(self.size))
         _log.debug("Group 0: %r", par.group(0))
         _log.debug("Group 1: %r", par.group(1))
         _log.debug("Group 2: %r", par.group(2))
