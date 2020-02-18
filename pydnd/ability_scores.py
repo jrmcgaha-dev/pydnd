@@ -8,7 +8,7 @@ import typing
 from pydnd.dice_bag import Roller, _log as _roll_log
 
 
-_log = logging.getLogger('pydnd')
+_log = logging.getLogger(__name__)
 
 
 class Ability:

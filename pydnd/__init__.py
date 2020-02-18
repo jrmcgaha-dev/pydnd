@@ -5,7 +5,7 @@ import logging
 
 
 logging.basicConfig(
-    format='%(name)s.%(module)s [%(asctime)s] [%(levelname)s]: %(message)s',
+    format='%(name)s [%(asctime)s] [%(levelname)s]: %(message)s',
     datefmt='%H:%M',
     level=logging.INFO,
 )

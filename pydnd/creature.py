@@ -9,10 +9,7 @@ import typing
 from pydnd.ability_scores import AbilityScores
 
 
-logging.basicConfig(level=logging.INFO)
-_log: logging.Logger = logging.getLogger(__name__)
-_log.debug("Establish that logger is active")
-_log.debug("Change logging level to INFO before develop merge")
+_log = logging.getLogger(__name__)
 
 
 class Creature:
