@@ -1,0 +1,2 @@
+class PydndException(Exception):
+    pass
