@@ -189,6 +189,11 @@ class AbilityScores:
     element access with additional handling in place to enforce that only
     Ability instances exist within an AbilityScores instance.
 
+    Raises
+    ------
+    AbilityError
+        setitem value is neither Ability nor able to be converted to Ability
+
     Examples
     --------
     >>> AbilityScores()['str']
