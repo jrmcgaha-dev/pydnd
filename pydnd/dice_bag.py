@@ -124,7 +124,7 @@ class Roller:
         total = sum(results)
         if action.group(1):
             total *= -1
-        _log.info(" %s : %s => %s",
+        _log.info("%s : %s => %s",
                   action.group(0),
                   pretty_results,
                   total)
@@ -174,7 +174,7 @@ class Roller:
         _results = tuple(map(self._resolve_action, _prep_input))
         _total = sum(_results[:-1])
         if _results[-1]:
-            _log.info(" Total: %s Message: %s", _total, _results[-1])
+            _log.info("Total: %s Message: %s", _total, _results[-1])
         else:
-            _log.info(" Total: %s", _total)
+            _log.info("Total: %s", _total)
         return _total
