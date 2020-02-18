@@ -1,13 +1,13 @@
-from pydnd import _main
+from pydnd import scripts
 
 
 def test_imports():
-    assert hasattr(_main, 'argparse')
-    assert hasattr(_main, 'logging')
-    assert hasattr(_main, 'sys')
-    assert hasattr(_main, 'dice_bag')
+    assert hasattr(scripts, 'argparse')
+    assert hasattr(scripts, 'logging')
+    assert hasattr(scripts, 'sys')
+    assert hasattr(scripts, 'dice_bag')
 
 
 def test_main():
-    assert hasattr(_main, 'main')
-    assert callable(_main.main)
+    assert hasattr(scripts, 'main')
+    assert callable(scripts.main)
