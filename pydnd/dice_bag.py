@@ -185,16 +185,21 @@ class Roller:
         return _total
 
 
-def _stress_randint(_func: typing.Callable, depth: int = 100) -> str:
+def _stress_randint(_func: typing.Callable, depth: int = 10) -> str:
     try:
-        tmp = _func(1, 20)
+        tmp = _func(1, 200)
     except TypeError:
         return 'Broken'
     if not isinstance(tmp, int):
         return 'Broken'
+    repeat_check = True
     for _ in range(depth):
         old_tmp = tmp
-        tmp = _func(1, 20)
+        tmp = _func(1, 200)
+        if tmp > 200 or tmp < 1:
+            return 'Broken'
         if not old_tmp == tmp:
-            return ''
-    return 'Suspicious'
+            repeat_check = False
+    if repeat_check:
+        return 'Suspicious'
+    return ''
