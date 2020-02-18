@@ -15,7 +15,7 @@ def test_parsing_exception():
     assert exceptions.PydndException in exceptions.ParseError.__bases__
     try:
         raise exceptions.ParseError
-    except exceptions.PydndException:
-        assert True
     except exceptions.ParseError:
+        assert True
+    except exceptions.PydndException:
         assert True
