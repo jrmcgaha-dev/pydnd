@@ -31,5 +31,5 @@ def test_roller_error():
     assert hasattr(exceptions, 'RollerError')
     try:
         raise exceptions.RollerError
-    except exceptions.AbilityError:
+    except exceptions.RollerError:
         assert True
