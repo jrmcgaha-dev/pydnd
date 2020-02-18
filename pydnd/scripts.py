@@ -5,9 +5,7 @@ import sys
 from pydnd import dice_bag
 
 
-logging.basicConfig(level=logging.DEBUG)
-# Change above to INFO before merge
-_log = logging.getLogger('pydnd')
+_log = logging.getLogger(__name__)
 roller = dice_bag.Roller()
 
 
