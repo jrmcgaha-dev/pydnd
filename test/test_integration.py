@@ -6,6 +6,17 @@ def test_rolling():
     assert 5 <= pydnd.roll('1d20+4') <= 24
 
 
+def test_custom_roller():
+    import secrets
+
+    def random_num(a: int, b: int) -> int:
+        return secrets.choice(range(a, b+1))
+
+    custom = pydnd.Roller(random_num)
+    assert 1 <= custom.roll('1d20') <= 20
+    assert 5 <= custom.roll('1d20+4') <= 24
+
+
 def test_monster():
     goblin = pydnd.Monster()
     goblin.name = 'Bill'
