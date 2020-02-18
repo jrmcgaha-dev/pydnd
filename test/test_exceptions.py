@@ -25,3 +25,11 @@ def test_ability_error():
         raise exceptions.AbilityError
     except exceptions.AbilityError:
         assert True
+
+
+def test_roller_error():
+    assert hasattr(exceptions, 'RollerError')
+    try:
+        raise exceptions.RollerError
+    except exceptions.AbilityError:
+        assert True
