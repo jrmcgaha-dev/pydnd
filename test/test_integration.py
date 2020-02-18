@@ -7,7 +7,7 @@ def test_rolling():
 
 
 def test_monster():
-    goblin = pydnd.monster.Monster()
+    goblin = pydnd.Monster()
     goblin.name = 'Bill'
     assert goblin.name == 'Bill'
     goblin.size = 'small'

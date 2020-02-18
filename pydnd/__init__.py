@@ -11,7 +11,9 @@ logging.basicConfig(
 )
 
 
-from pydnd import ability_scores, creature, monster
+from pydnd.ability_scores import Ability, AbilityScores
+from pydnd.creature import Creature
+from pydnd.monster import Monster
 from pydnd.dice_bag import Roller
 
 
