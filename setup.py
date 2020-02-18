@@ -13,7 +13,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'pydnd = pydnd._main:main'
+            'pydnd = pydnd.scripts:main'
         ]
     }
 )
