@@ -6,6 +6,7 @@ import logging
 import typing
 
 from pydnd.dice_bag import Roller, _log as _roll_log
+from pydnd.exceptions import AbilityError
 
 
 _log = logging.getLogger(__name__)
@@ -295,5 +296,5 @@ class AbilityScores:
         elif isinstance(value, dict):
             self._array[key] = Ability(**value)
         else:
-            _log.warning("Input %r failed to parse. Ignoring input.", value)
+            raise AbilityError(str(value))
 
