@@ -17,5 +17,11 @@ def test_parsing_exception():
         raise exceptions.ParseError
     except exceptions.ParseError:
         assert True
-    except exceptions.PydndException:
+
+
+def test_ability_error():
+    assert hasattr(exceptions, 'AbilityError')
+    try:
+        raise exceptions.AbilityError
+    except exceptions.AbilityError:
         assert True
