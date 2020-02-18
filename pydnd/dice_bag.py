@@ -40,6 +40,11 @@ class Roller:
         randint_function : Callable[[int, int], int]
             Function that acts similar to random.randint
             Defaults to random.randint
+
+        Raises
+        ------
+        RollerError
+            Raised on detection of broken or suspicious randint_function
         """
         if randint_function is None:
             randint_function = random.randint
