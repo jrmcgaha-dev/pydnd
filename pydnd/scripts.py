@@ -31,8 +31,3 @@ def main(*_args):
         roller.roll(_item)
     if args.message:
         _log.info("message: %s", args.message)
-
-
-if __name__ == '__main__':
-    main()
-    exit()
